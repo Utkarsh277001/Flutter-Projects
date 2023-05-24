@@ -6,4 +6,4 @@ OwnertHistoryRoute.put("/updateVisited/:id",AuthenticateVisitor);
 
 OwnertHistoryRoute.post("/ownerHistory",ownerHistory);
 
-module.exports=OwnertHistoryRoute;
+module.exports=OwnertHistoryRoute
