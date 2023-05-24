@@ -22,7 +22,7 @@ class gymOwner {
     try {
       EasyLoading.show(status: 'Signing Up ...');
       http.Response res = await http.post(
-        Uri.parse('${Constant.url}/gymOwnerRegis'),
+        Uri.parse('${Constant.url}/gymOwner/Register'),
         body: jsonEncode({
           'name': name,
           'email': email,
@@ -65,7 +65,7 @@ class gymOwner {
     try {
       EasyLoading.show(status: 'Logging In...');
       http.Response res = await http.post(
-        Uri.parse('${Constant.url}/gymOwnerlogin'),
+        Uri.parse('${Constant.url}/gymOwner/login'),
         body: jsonEncode({
           'email': email,
           'password': password,

@@ -38,7 +38,7 @@ class _GymOwnerPageState extends State<GymOwnerPage> {
 
   Future<void> deleteGym() async {
     EasyLoading.show(status: 'Deleting Gym...');
-    final url = '${Constant.url}/deleteGymData/' + widget.gymData.id;
+    final url = '${Constant.url}/gymInfo/deleteGymData/' + widget.gymData.id;
     final response = await http.delete(Uri.parse(url));
 
     if (response.statusCode == 200) {

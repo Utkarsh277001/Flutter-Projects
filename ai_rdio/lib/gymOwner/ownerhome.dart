@@ -33,7 +33,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
     ownerEmail = prefs.getString('ownerEmail') ?? '';
     print(ownerEmail);
 
-    String url = '${Constant.url}/ownerGymDetails/' + ownerEmail;
+    String url = '${Constant.url}/gymInfo/ownerGymDetails/' + ownerEmail;
     try {
       var response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {

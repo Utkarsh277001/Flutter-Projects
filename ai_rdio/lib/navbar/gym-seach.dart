@@ -34,8 +34,8 @@ class _GymListScreenState extends State<GymListScreen> {
 
   Future<void> gymSearch(String searchText) async {
     // EasyLoading.show(status: "Retriving User's History..");
-    final response =
-        await http.get(Uri.parse('${Constant.url}/searchGym/' + searchText));
+    final response = await http
+        .get(Uri.parse('${Constant.url}/gymInfo/searchGym/' + searchText));
 
     if (response.statusCode == 200) {
       EasyLoading.dismiss();

@@ -157,7 +157,7 @@ class _OwnerHistoryPageState extends State<OwnerHistoryPage> {
     id = prefs.getString('id')!;
     username = prefs.getString('name')!;
     print(id + '  hai');
-    var url = Uri.parse('${Constant.url}/getDailyGymUser/' +
+    var url = Uri.parse('${Constant.url}/schedule/getDailyGymUser/' +
         id); // Replace with your backend URL
     var response = await http.get(url);
     if (response.statusCode == 200) {

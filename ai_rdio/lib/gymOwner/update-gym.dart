@@ -48,7 +48,7 @@ class _GymupdateState extends State<Gymupdate> {
 
   Future updateGymData() async {
     EasyLoading.show(status: 'Editing Gym Data...');
-    final url = "${Constant.url}/updateGymData/${widget.id}";
+    final url = "${Constant.url}/gymInfo/updateGymData/${widget.id}";
     final headers = {HttpHeaders.contentTypeHeader: 'application/json'};
     final body = json.encode({
       'gymName': _gymName,

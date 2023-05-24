@@ -83,8 +83,8 @@ class _GymPageDateState extends State<GymPageDate> {
     //   },
     // );
     try {
-      final response =
-          await http.post(Uri.parse('${Constant.url}/addDailyGym'), body: {
+      final response = await http
+          .post(Uri.parse('${Constant.url}/schedule/addDailyGym'), body: {
         'userId': userId,
         'gymName': gymName,
         'location': location,
