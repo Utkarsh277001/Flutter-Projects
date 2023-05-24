@@ -12,4 +12,4 @@ gymSchRouter.get("/getDailyGym",DailyGym);
 
 gymSchRouter.get("/getDailyGymUser/:id",dailyUser);
 
-module.exports=gymSchRouter;
+module.exports=gymSchRouter ;

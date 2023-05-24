@@ -17,7 +17,7 @@ const app=express();
 
 mongoose.connect(dbLink).then(()=>{
     console.log("Connection to database is sucessful");
-}).catch((e)=>{
+}).catch((e)=> {
     console.log(e);
 });
 

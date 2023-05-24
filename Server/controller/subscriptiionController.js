@@ -10,7 +10,7 @@ const newSubscription=async(req,res)=>{
         res.status(200).json(subscribe);
     }catch(error){
         res.status(500).json({error:error.message})
-    }
+     }
 }
 
 const subscriptionDetail=async(req,res)=>{

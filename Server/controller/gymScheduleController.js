@@ -10,7 +10,7 @@ const addDailyGym=async(req,res)=>{
         console.log(exist);
         if(Array.isArray(exist)&&exist.length!=0){
             return res.status(400).json({msg:"Already Added"});
-        }
+         }
 
         
         let newData=  new dailyGym(req.body);

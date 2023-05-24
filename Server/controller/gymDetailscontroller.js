@@ -14,7 +14,7 @@ const GymData=async(req,res)=>{
     try {
         let Validation={ownerEmail:req.body.ownerEmail,gymName:req.body.gymName};
         let data= await gymdata.find(Validation);
-        console.log(data);
+         console.log(data);
         if(Array.isArray(data)&&data.length!=0){
             return res.status(400).json({msg:"Already Added"});
         }

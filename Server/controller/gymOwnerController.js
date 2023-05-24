@@ -13,7 +13,7 @@ const ownerRegister=async(req,res)=>{
     //if user is not registered then we create the hashed password
     if(password=="" ||password.length<8){
         return res.status(400).json({msg:'password cannot be empty or size cannot be less than 8'})
-    }
+     }
     
     const hashedPassword=await bcrypt.hash(password,10);
 

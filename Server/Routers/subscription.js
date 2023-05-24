@@ -6,4 +6,4 @@ subscriptionRouter.post("/new",newSubscription);
 
 subscriptionRouter.get("/:Email",subscriptionDetail);
 
-module.exports=subscriptionRouter;
+module.exports=subscriptionRouter ;

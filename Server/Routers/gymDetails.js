@@ -12,4 +12,4 @@ gymDetailsrouter.delete("/deleteGymData/:id",deleteGym);
 
 gymDetailsrouter.put("/updateGymData/:id",updateGym);
 
-module.exports=gymDetailsrouter;
+module.exports=gymDetailsrouter ;

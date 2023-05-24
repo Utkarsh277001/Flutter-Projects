@@ -17,7 +17,7 @@ const signup=async(req,res)=>{
     const hashedPassword=await bcrypt.hash(password,10); 
 
     //here we create the new user
-    let user=new User({
+    let user=new User({ 
         name,
         email,
         password:hashedPassword,

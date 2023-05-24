@@ -6,4 +6,4 @@ ownerRoute.post("/Register",ownerRegister);
 
 ownerRoute.post("/login",ownerLogin);
 
-module.exports=ownerRoute;
+module.exports=ownerRoute ;
