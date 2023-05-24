@@ -54,7 +54,7 @@ class authAervices {
     }
   }
 
-  //User Login------
+  //Login
   void login(
       {required BuildContext context,
       required String email,
