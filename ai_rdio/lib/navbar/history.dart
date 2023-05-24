@@ -158,7 +158,7 @@ class _HistoryPageState extends State<HistoryPage> {
     useremail = prefs.getString('email')!;
     username = prefs.getString('name')!;
 
-    var url = Uri.parse('${Constant.url}/getDailyGymUser/' +
+    var url = Uri.parse('${Constant.url}/schedule/getDailyGymUser/' +
         useremail); // Replace with your backend URL
     var response = await http.get(url);
     if (response.statusCode == 200) {

@@ -38,7 +38,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
   List<gymDetails> gymdetails = [];
 
   Future<void> getGymDetails() async {
-    var url = Uri.parse('${Constant.url}/allGymData');
+    var url = Uri.parse('${Constant.url}/gymInfo/allGymData');
     var response = await http.get(url);
     if (response.statusCode == 200) {
       EasyLoading.dismiss();

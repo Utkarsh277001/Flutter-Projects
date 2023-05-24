@@ -101,4 +101,17 @@ const updateGym=async(req,res)=>{
     }
 }
 
+const ownerGymDetails=async(req,res)=>{
+   console.log("req is ", req.params.ownerEmail)
+    try{
+        let allData=  await gymdata.find({ownerEmail:req.params.ownerEmail});
+        console.log(allData);
+        res.status(200).json(allData);
+    }
+    catch(error){
+        console.log("error in getting owner's gym Details", error.message);
+        res.status(500).json({msg:"error while getting daily data "});
+    }
+}
+
 module.exports={GymData,updateGym,allGym,deleteGym,searchCity};

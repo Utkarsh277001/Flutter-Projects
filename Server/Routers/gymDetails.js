@@ -12,4 +12,6 @@ gymDetailsrouter.delete("/deleteGymData/:id",deleteGym);
 
 gymDetailsrouter.put("/updateGymData/:id",updateGym);
 
+gymDetailsrouter.get("/ownerGymDetails/:ownerEmail",ownerGymDetails);
+
 module.exports=gymDetailsrouter ;

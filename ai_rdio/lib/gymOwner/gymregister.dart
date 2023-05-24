@@ -54,7 +54,7 @@ class _GymRegistrationPageState extends State<GymRegistrationPage> {
     try {
       EasyLoading.show(status: 'Adding Details ...');
       var request = await http.MultipartRequest(
-          'POST', Uri.parse('${Constant.url}/gymDatas'));
+          'POST', Uri.parse('${Constant.url}/gymInfo/gymDatas'));
       request.fields["ownerEmail"] = _ownerEmail;
       request.fields["gymName"] = _gymName;
       request.fields["City"] = _City;

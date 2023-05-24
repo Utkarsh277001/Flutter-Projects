@@ -55,7 +55,7 @@ class _TodayVisitState extends State<TodayVisit> {
 
   Future<void> _fetchData() async {
     http.Response res = await http.post(
-      Uri.parse('${Constant.url}/gymDatas/ownerHistory'),
+      Uri.parse('${Constant.url}/gymData/ownerHistory'),
       body: jsonEncode({
         'ownerEmail': widget.ownerEmail,
         'gymName': widget.gymName,
@@ -127,7 +127,7 @@ class _DataContainerState extends State<DataContainer> {
 
   Future updateVisited() async {
     http.Response res = await http.put(
-      Uri.parse('${Constant.url}/updateVisited/${widget.userData.id}'),
+      Uri.parse('${Constant.url}/gymData/updateVisited/${widget.userData.id}'),
       body: jsonEncode({
         'Visited': true,
       }),

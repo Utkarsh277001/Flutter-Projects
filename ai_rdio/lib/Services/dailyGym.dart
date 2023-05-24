@@ -22,7 +22,7 @@ class DailyGym {
     try {
       EasyLoading.show(status: 'Adding Details ...');
       http.Response res = await http.post(
-        Uri.parse('${Constant.url}/addDailyGym'),
+        Uri.parse('${Constant.url}/scheduler/addDailyGym'),
         body: jsonEncode({
           'ownerEmail': ownerEmail,
           'userEmail': userEmail,

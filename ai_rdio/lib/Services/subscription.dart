@@ -17,7 +17,7 @@ class Subscription {
     try {
       EasyLoading.show(status: 'Adding Details ...');
       http.Response res = await http.post(
-        Uri.parse('${Constant.url}/subscription'),
+        Uri.parse('${Constant.url}/subscription/new'),
         body: jsonEncode({
           'userId': userId,
           'Email': email,
