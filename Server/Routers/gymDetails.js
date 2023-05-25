@@ -1,5 +1,5 @@
 const express=require("express");
-const { GymData, searchCity, allGym, deleteGym, updateGym } = require("../controller/gymDetailscontroller");
+const { GymData, searchCity, allGym, deleteGym, updateGym, ownerGymDetails } = require("../controller/gymDetailscontroller");
 const gymDetailsrouter=express.Router();
 
 gymDetailsrouter.post("/gymDatas",GymData);

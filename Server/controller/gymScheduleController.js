@@ -63,7 +63,7 @@ const History=async(req,res)=>{
 
 const DailyGym=async(req,res)=>{
     try{
-        let allData=  await DailyGym.find();
+        let allData=  await dailyGym.find();
 
         res.status(201).json({allData})
     }
@@ -78,7 +78,7 @@ const dailyUser=async(req,res)=>{
 
     console.log("req is ", req.params.id)
     try{
-        let allData=  await DailyGym.find({userEmail:req.params.id});
+        let allData=  await dailyGym.find({userEmail:req.params.id});
         console.log(allData);
         res.status(200).json(allData)
     }

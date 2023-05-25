@@ -114,4 +114,4 @@ const ownerGymDetails=async(req,res)=>{
     }
 }
 
-module.exports={GymData,updateGym,allGym,deleteGym,searchCity};
+module.exports={GymData,updateGym,allGym,deleteGym,searchCity,ownerGymDetails};
