@@ -10,6 +10,7 @@ const subscriptionRouter = require("./Routers/subscription");
 const ownerRoute = require("./Routers/gymOwner");
 const OwnertHistoryRoute = require("./Routers/ownerHistory");
 const gymSchRouter = require("./Routers/gymScheduler");
+const superAdmin = require("./Routers/superAdmin");
 
 const dbLink = process.env.Link;
 const PORT=process.env.PORT;
@@ -35,6 +36,7 @@ app.use("/subscription",subscriptionRouter);
 app.use("/gymOwner",ownerRoute);
 app.use("/gymData",OwnertHistoryRoute);
 app.use("/schedule",gymSchRouter);
+app.use("/super",superAdmin);
 // app.use();
 app.listen(PORT,"0.0.0.0",()=>{
     console.log(`welcome to server ${PORT}`);
