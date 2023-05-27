@@ -2,6 +2,7 @@ const User=require("../Models/User");
 const ownerGym = require("../Models/gymOwner");
 const gymdata = require("../Models/gymsData");
 const subscription = require("../Models/Subscription");
+// const gymdata = require("../Models/gymsData");
 const getStats=async(req,res)=>{
     try {
         const userCount = await User.countDocuments();
@@ -49,5 +50,54 @@ const getSubscriptionDataByEmail = async (req, res) => {
   }
 };
 
+const getAllGyms = async (req, res) => {
+  // const { Email } = req.params;
 
-module.exports={getStats,getAllUsers,getSubscriptionDataByEmail}
+  try {
+    const gyms = await gymdata.find();
+    
+    if (!gyms) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
+    // const { startDate, endDate } = user;
+    res.status(200).json({gyms});
+  } catch (error) {
+    console.log("Error while getting user: ", error.message);
+    res.status(500).json({ msg: "Error while getting user" });
+  }
+};
+
+const gymOwners = async (req, res) => {
+  // const { Email } = req.params;
+
+  try {
+    const owners = await ownerGym.find();
+    
+    if (!owners) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
+    // const { startDate, endDate } = user;
+    res.status(200).json({owners});
+  } catch (error) {
+    console.log("Error while getting user: ", error.message);
+    res.status(500).json({ msg: "Error while getting user" });
+  }
+}
+
+const RegisterGymofOwner = async (req, res) => {
+  const { Email } = req.params;
+  try{
+    const gym = await gymdata.find({ownerEmail:Email})
+    if (!gym) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+    res.status(200).json({gym});
+  }
+    catch (error) {
+      console.log("Error while getting gym: ", error.message);
+    res.status(500).json({ msg: "Error while getting gym" });
+  }
+}
+module.exports={getStats,getAllUsers,getSubscriptionDataByEmail,getAllGyms,gymOwners,RegisterGymofOwner}

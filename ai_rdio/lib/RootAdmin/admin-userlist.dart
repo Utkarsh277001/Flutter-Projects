@@ -131,6 +131,7 @@ class _UserListPageState extends State<UserListPage> {
             TextButton(
               onPressed: () => Navigator.pop(context),
               child: Text('OK'),
+              
             ),
           ],
         ),
@@ -246,35 +247,15 @@ class _UserListPageState extends State<UserListPage> {
                             TextButton(
                               onPressed: () => Navigator.pop(context),
                               child: Text('OK'),
+                              style: TextButton.styleFrom(
+    primary: Colors.white,
+    backgroundColor: Colors.black, //set the background color to black
+  ),
                             ),
                           ],
                         );
                       },
                     );
-
-                    // await showDialog(
-                    //   context: context,
-                    //   builder: (context) => AlertDialog(
-                    //     title: Text(selectedUser.name),
-                    //     content: Column(
-                    //       mainAxisSize: MainAxisSize.min,
-                    //       crossAxisAlignment: CrossAxisAlignment.start,
-                    //       children: [
-                    //         Text('Email: ${selectedUser.email}'),
-                    //         SizedBox(height: 8),
-                    //         Text('Age: ${selectedUser.age}'),
-                    //         SizedBox(height: 8),
-                    //         Text('Gender: ${selectedUser.gender}'),
-                    //       ],
-                    //     ),
-                    //     actions: [
-                    //       TextButton(
-                    //         onPressed: () => Navigator.pop(context),
-                    //         child: Text('OK'),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // );
                   },
                 );
               },
