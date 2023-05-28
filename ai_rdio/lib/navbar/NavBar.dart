@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../RootAdmin/admin-home.dart';
+import '../RootAdmin/admin-main.dart';
 import '../screen/RegLoginUi.dart';
 import '../screen/user-choice.dart';
 import 'about.dart';
@@ -164,11 +166,16 @@ class _NavBarState extends State<NavBar> {
           //     print("share");
           //   },
           // ),
-          // ListTile(
-          //   leading: Icon(Icons.notifications),
-          //   title: Text('Notifications'),
-          //   onTap: () => print('notifications'),
-          // ),
+          ListTile(
+            leading: Icon(Icons.admin_panel_settings_sharp),
+            title: Text('admin panel'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SuperAdminMainPage()),
+              );
+            },
+          ),
           // ListTile(
           //   leading: Icon(Icons.settings),
           //   title: Text('Settings'),
