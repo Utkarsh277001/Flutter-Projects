@@ -36,6 +36,7 @@ dependencies:
   flutter:
     sdk: flutter
   chat_bubbles: ^1.4.0
+  multiavatar: any
   
     
     

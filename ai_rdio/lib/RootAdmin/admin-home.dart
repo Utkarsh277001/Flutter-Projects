@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import '../Utils/Constant.dart';
+import 'admin-gymlist.dart';
+import 'admin-userlist.dart';
+import 'admin-gymownerlist.dart';
 
 class SuperAdminHomePage extends StatefulWidget {
   @override
@@ -21,7 +24,8 @@ class _SuperAdminHomePageState extends State<SuperAdminHomePage> {
   }
 
   Future<void> loadData() async {
-    final response = await http.get(Uri.parse('${Constant.url}/getStats'));
+    final response =
+        await http.get(Uri.parse('${Constant.url}/super/getStats'));
     final data = jsonDecode(response.body);
     print("Api called");
     setState(() {
@@ -110,6 +114,12 @@ class _SuperAdminHomePageState extends State<SuperAdminHomePage> {
                                 ),
                               ),
                               onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => UserListPage()),
+                                );
+
                                 // handle button press
                               },
                               child: Text('$_users'),
@@ -142,6 +152,11 @@ class _SuperAdminHomePageState extends State<SuperAdminHomePage> {
                               ),
                               onPressed: () {
                                 // handle button press
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => GymList()),
+                                );
                               },
                               child: Text('$_totalGyms'),
                             ),
@@ -174,6 +189,11 @@ class _SuperAdminHomePageState extends State<SuperAdminHomePage> {
                               ),
                               onPressed: () {
                                 // handle button press
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => GymOwnersPage()),
+                                );
                               },
                               child: Text('$_totalGymOwners'),
                             ),
