@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import '../Utils/Constant.dart';
+import 'admin-user-all-history.dart';
 
 Future<SubscriptionData> fetchSubscriptionData(String email) async {
   final response = await http
@@ -131,7 +132,6 @@ class _UserListPageState extends State<UserListPage> {
             TextButton(
               onPressed: () => Navigator.pop(context),
               child: Text('OK'),
-              
             ),
           ],
         ),
@@ -179,84 +179,121 @@ class _UserListPageState extends State<UserListPage> {
             return ListView.builder(
               itemCount: _users.length,
               itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage:
-                        _getProfileImageByGender(_users[index].gender),
+                return Container(
+                  margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                  padding: EdgeInsets.all(11.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.3),
+                        spreadRadius: 1,
+                        blurRadius: 2,
+                        offset: Offset(0, 1), // changes position of shadow
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
-                  title: Text(
-                    _users[index].name,
-                  ),
-                  subtitle: Text(
-                      '${_users[index].email}, ${_users[index].age} years'),
-                  onTap: () async {
-                    var selectedUser = _users[index];
-                    await showDialog(
-                      context: context,
-                      builder: (context) {
-                        String assetName = selectedUser.gender == 'male'
-                            ? 'assets/images/male-dp.png'
-                            : 'assets/images/female-dp.png';
-                        return AlertDialog(
-                          title: Row(
-                            children: [
-                              Image.asset(assetName, width: 32, height: 32),
-                              SizedBox(width: 8),
-                              Text(selectedUser.name),
-                            ],
-                          ),
-                          content: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Email: ${selectedUser.email}'),
-                              SizedBox(height: 8),
-                              Text('Age: ${selectedUser.age}'),
-                              SizedBox(height: 8),
-                              Text('Gender: ${selectedUser.gender}'),
-                              SizedBox(height: 8),
-                              FutureBuilder(
-                                future:
-                                    fetchSubscriptionData(selectedUser.email),
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    SubscriptionData? subscriptionData =
-                                        snapshot.data;
-                                    return Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                            'Start date: ${subscriptionData?.startDate}'),
-                                        SizedBox(height: 8),
-                                        Text(
-                                            'End date: ${subscriptionData?.endDate}'),
-                                      ],
-                                    );
-                                  } else if (snapshot.hasError) {
-                                    return Text(
-                                        'Error fetching subscription data');
-                                  } else {
-                                    return Text('No subscription');
-                                  }
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage:
+                          _getProfileImageByGender(_users[index].gender),
+                    ),
+                    title: Text(
+                      _users[index].name,
+                    ),
+                    subtitle: Text(
+                        '${_users[index].email}, ${_users[index].age} years'),
+                    onTap: () async {
+                      var selectedUser = _users[index];
+                      print(selectedUser.email);
+                      await showDialog(
+                        context: context,
+                        builder: (context) {
+                          String assetName = selectedUser.gender == 'male'
+                              ? 'assets/images/male-dp.png'
+                              : 'assets/images/female-dp.png';
+                          return AlertDialog(
+                            title: Row(
+                              children: [
+                                Image.asset(assetName, width: 32, height: 32),
+                                SizedBox(width: 8),
+                                Text(selectedUser.name),
+                              ],
+                            ),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Email: ${selectedUser.email}'),
+                                SizedBox(height: 8),
+                                Text('Age: ${selectedUser.age}'),
+                                SizedBox(height: 8),
+                                Text('Gender: ${selectedUser.gender}'),
+                                SizedBox(height: 8),
+                                FutureBuilder(
+                                  future:
+                                      fetchSubscriptionData(selectedUser.email),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      SubscriptionData? subscriptionData =
+                                          snapshot.data;
+                                      return Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                              'Start date: ${subscriptionData?.startDate}'),
+                                          SizedBox(height: 8),
+                                          Text(
+                                              'End date: ${subscriptionData?.endDate}'),
+                                        ],
+                                      );
+                                    } else if (snapshot.hasError) {
+                                      return Text(
+                                          'Error fetching subscription data');
+                                    } else {
+                                      return Text('No subscription');
+                                    }
+                                  },
+                                ),
+                              ],
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: Text('OK'),
+                                style: TextButton.styleFrom(
+                                  primary: Colors.white,
+                                  backgroundColor: Colors
+                                      .black, //set the background color to black
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => GymUserHistoryPage(
+                                        userEmail: selectedUser.email,
+                                        name: selectedUser.name,
+                                      ),
+                                    ),
+                                  );
                                 },
+                                child: Text('History'),
+                                style: TextButton.styleFrom(
+                                  primary: Colors.black,
+                                  backgroundColor: Colors.white,
+                                  side: BorderSide(color: Colors.black),
+                                ),
                               ),
                             ],
-                          ),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.pop(context),
-                              child: Text('OK'),
-                              style: TextButton.styleFrom(
-    primary: Colors.white,
-    backgroundColor: Colors.black, //set the background color to black
-  ),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
+                          );
+                        },
+                      );
+                    },
+                  ),
                 );
               },
             );

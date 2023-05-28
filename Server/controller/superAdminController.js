@@ -2,6 +2,7 @@ const User=require("../Models/User");
 const ownerGym = require("../Models/gymOwner");
 const gymdata = require("../Models/gymsData");
 const subscription = require("../Models/Subscription");
+const dailyGym = require("../Models/daily-gym");
 // const gymdata = require("../Models/gymsData");
 const getStats=async(req,res)=>{
     try {
@@ -100,4 +101,87 @@ const RegisterGymofOwner = async (req, res) => {
     res.status(500).json({ msg: "Error while getting gym" });
   }
 }
-module.exports={getStats,getAllUsers,getSubscriptionDataByEmail,getAllGyms,gymOwners,RegisterGymofOwner}
+
+const UserRecordForSuperAdmin = async (req, res) => {
+  const userEmail = req.params.userEmail;
+  // Visited: true
+  try {
+    const gym = await dailyGym.find({userEmail: userEmail, })
+    if (!gym || gym.length === 0) {
+      return res.status(404).json({ msg: "User not found or no visited gyms" });
+    }
+    res.status(200).json({gym});
+  } catch (error) {
+    console.log("Error while getting gym: ", error.message);
+    res.status(500).json({ msg: "Error while getting gym" });
+  }
+}
+
+// const GymHistoryRecordForSuperAdmin =  async (req, res) => {
+//   const ownerEmail = req.params.ownerEmail;
+//   const gymName = req.params.gymName;
+//   const location = req.params.location;
+
+//   try {
+//     const gyms = await dailyGym.find({
+//       ownerEmail: ownerEmail,
+//       gymName: gymName,
+//       location: location,
+//     }).exec();
+
+//     if (!gyms || gyms.length === 0) {
+//       return res.status(404).json({ msg: "No gyms found" });
+//     }
+
+//     res.status(200).json(gyms);
+//   } catch (error) {
+//     console.log("Error while getting gym: ", error.message);
+//     res.status(500).json({ msg: "Error while getting gym" });
+//   }
+// }
+const GymHistoryRecordForSuperAdmin = async (req, res) => {
+  const ownerEmail = req.params.ownerEmail;
+  const gymName = req.params.gymName;
+  const location = req.params.location;
+  // const date = req.params.date;
+
+  try {
+    const gyms = await dailyGym.find({
+      ownerEmail: ownerEmail,
+      gymName: gymName,
+      location: location,
+      // date: date
+    }).exec();
+
+    if (!gyms || gyms.length === 0) {
+      return res.status(404).json({ msg: "No gyms found" });
+    }
+
+    res.status(200).json(gyms);
+  } catch (error) {
+    console.log("Error while getting gym: ", error.message);
+    res.status(500).json({ msg: "Error while getting gym" });
+  }
+};
+
+//get a single user data by their email
+const getUser = async (req, res) => {
+  const {Email} = req.params;
+  try{
+    const user = await User.find({email:Email})
+    if(user === null || user.length === 0){
+      return res.status(404).json({ msg: "User not found" });
+    }
+    res.status(200).json({user});
+  }
+    catch (error) {
+      console.log("Error while getting user: ", error.message);
+      res.status(500).json({ msg: "Error while getting user" });
+    }
+  }
+
+
+
+
+
+module.exports={getStats,getAllUsers,getSubscriptionDataByEmail,getAllGyms,gymOwners,RegisterGymofOwner,UserRecordForSuperAdmin,GymHistoryRecordForSuperAdmin,getUser}
