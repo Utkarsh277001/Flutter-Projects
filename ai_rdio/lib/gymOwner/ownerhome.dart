@@ -47,17 +47,6 @@ class _AdminHomePageState extends State<AdminHomePage> {
           print(_gymData);
           print(_gymData.length);
           _hasRegisteredGym = true;
-          // prefs.setString('len', _gymData.length.toString()) as String;
-          // len = prefs.getString('len') ?? '';
-
-          // if (_gymData.length == 0) {
-          //   _hasRegisteredGym = false;
-          // } else {
-          //   _hasRegisteredGym = true;
-          // }
-          // prefs.setString('len', len.toString());
-
-          // print(_gymData[0]);
         });
       } else {
         _hasRegisteredGym = false;
@@ -111,40 +100,12 @@ class _AdminHomePageState extends State<AdminHomePage> {
         iconTheme: IconThemeData(color: Colors.black),
       ),
       body: _hasRegisteredGym
-          ?
-          // ? ListView.builder(
-          //     itemCount: _gymData.length,
-          //     itemBuilder: (context, index) {
-          //       return ListTile(
-          //         leading: Image.network(_gymData[index]["gymPic"] as String),
-          //         title: Text(_gymData[index]["name"] as String),
-          //         subtitle: Text(_gymData[in dex]["location"] as String),
-          //       );
-          //     },
-          //   )
-          ListView.builder(
+          ? ListView.builder(
               itemCount: _gymData.length,
               scrollDirection: Axis.vertical,
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
-                  // onTap: () {
-                  //   // print(_gymData.values.elementAt(index)['no.']);
-                  //   // print(gym.values.elementAt(index)['name'] as String);
-
-                  //   // Navigator.pushNamed(
-                  //   //   context,
-                  //   //   '/GymPageDate',
-                  //   //   arguments: index,
-                  //   // );
-
-                  // },
                   onTap: () {
-                    // print(_gymData[index].owneremail);
-                    // Navigator.pushNamed(
-                    //   context,
-                    //   '/GymOwnerPage',
-                    //   arguments: _gymData[index],
-                    // );
                     Navigator.push(
                         context,
                         MaterialPageRoute(

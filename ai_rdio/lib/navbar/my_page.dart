@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../screen/RegLoginUi.dart';
+import '../screen/user-choice.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -179,13 +180,19 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   padding: EdgeInsets.symmetric(vertical: 16),
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       print("logout");
                       // TODO: Implement logout functionality
+                      final prefs = await SharedPreferences.getInstance();
+                      prefs.remove('ownerId');
+                      prefs.remove('ownerName');
+                      prefs.remove('ownerEmail');
+                      prefs.remove('ownerAge');
+                      prefs.remove('ownerGender');
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => RegLoginUi()));
+                              builder: (context) => Userchoice()));
                     },
                     child: Row(
                       mainAxisSize: MainAxisSize.min,

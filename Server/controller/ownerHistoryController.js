@@ -29,5 +29,28 @@ const AuthenticateVisitor=async(req,res)=>{
       res.status(500).json({ msg: error.message });
     }
 }
+const GymHistoryRecordForGymOwner =  async (req, res) => {
+  const ownerEmail = req.params.ownerEmail;
+  const gymName = req.params.gymName;
+  const location = req.params.location;
 
-module.exports={AuthenticateVisitor,ownerHistory}
+  try {
+    const gyms = await dailyGym.find({
+      ownerEmail: ownerEmail,
+      gymName: gymName,
+      location: location,
+      Visited:true,
+    }).exec();
+
+    if (!gyms || gyms.length === 0) {
+      return res.status(404).json({ msg: "No gyms found" });
+    }
+
+    res.status(200).json(gyms);
+  } catch (error) {
+    console.log("Error while getting gym: ", error.message);
+    res.status(500).json({ msg: "Error while getting gym" });
+  }
+}
+
+module.exports={AuthenticateVisitor,ownerHistory,GymHistoryRecordForGymOwner}

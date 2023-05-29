@@ -4,21 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../Utils/Constant.dart';
 
-class GymUserListPage extends StatefulWidget {
+class OwnerGymHistory extends StatefulWidget {
   final String ownerEmail;
   final String gymName;
   final String location;
 
-  GymUserListPage(
+  OwnerGymHistory(
       {required this.ownerEmail,
       required this.gymName,
       required this.location});
 
   @override
-  _GymUserListPageState createState() => _GymUserListPageState();
+  _OwnerGymHistoryState createState() => _OwnerGymHistoryState();
 }
 
-class _GymUserListPageState extends State<GymUserListPage> {
+class _OwnerGymHistoryState extends State<OwnerGymHistory> {
   List<dynamic> gyms = [];
   dynamic _selectedUser;
 
@@ -55,7 +55,7 @@ class _GymUserListPageState extends State<GymUserListPage> {
   Future<void> getGyms() async {
     try {
       final response = await http.get(Uri.parse(
-          '${Constant.url}/super/GymHistoryRecordForSuperAdmin/${widget.ownerEmail}/${widget.gymName}/${widget.location}'));
+          '${Constant.url}/super/GymHistoryRecordForGymOwner/${widget.ownerEmail}/${widget.gymName}/${widget.location}'));
       if (response.statusCode == 200) {
         setState(() {
           gyms = json.decode(response.body);
@@ -100,7 +100,7 @@ class _GymUserListPageState extends State<GymUserListPage> {
           String userEmail = gyms[index]['userEmail'];
           return Container(
             margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-            padding: EdgeInsets.all(11.0),
+            padding: EdgeInsets.all(7.0),
             decoration: BoxDecoration(
               color: Colors.white,
               boxShadow: [
@@ -123,6 +123,29 @@ class _GymUserListPageState extends State<GymUserListPage> {
                     title: Text(userEmail),
                     subtitle: Text(
                         '${gyms[index]['date']} at ${gyms[index]['time']}'),
+                    trailing: gyms[index]['Visited']
+                        ? ElevatedButton(
+                            onPressed: () {},
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Color.fromARGB(255, 206, 206, 206)),
+                            ),
+                            child: Text(
+                              'Visited',
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          )
+                        : ElevatedButton(
+                            onPressed: () {},
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.black),
+                            ),
+                            child: Text(
+                              'Not Visited',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
                   );
                 }
 
@@ -133,6 +156,29 @@ class _GymUserListPageState extends State<GymUserListPage> {
                     title: Text(userEmail),
                     subtitle: Text(
                         '${gyms[index]['date']} at ${gyms[index]['time']}'),
+                    trailing: gyms[index]['Visited']
+                        ? ElevatedButton(
+                            onPressed: () {},
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Color.fromARGB(255, 206, 206, 206)),
+                            ),
+                            child: Text(
+                              'Visited',
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          )
+                        : ElevatedButton(
+                            onPressed: () {},
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.black),
+                            ),
+                            child: Text(
+                              'Not Visited',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
                   );
                 }
 
