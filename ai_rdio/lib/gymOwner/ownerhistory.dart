@@ -1,137 +1,13 @@
-// import 'package:flutter/material.dart';
-
-// class HistoryPage extends StatelessWidget {
-//   final String username = "John Doe";
-//   final List<HistoryItem> historyItems = [
-//     HistoryItem(
-//       image: "assets/images/Gym-1.jpg",
-//       gymName: "Gym A",
-//       location: "123 Main Street",
-//       date: "April 25th, 2023",
-//     ),
-//     HistoryItem(
-//       image: "assets/images/Gym-1.jpg",
-//       gymName: "Gym B",
-//       location: "456 Oak Avenue",
-//       date: "April 20th, 2023",
-//     ),
-//     HistoryItem(
-//       image: "assets/images/Gym-1.jpg",
-//       gymName: "Gym C",
-//       location: "789 Elm Boulevard",
-//       date: "April 15th, 2023",
-//     ),
-//   ];
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text("History"),
-//       ),
-//       body: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Padding(
-//             padding: const EdgeInsets.all(16.0),
-//             child: Text(
-//               "$username's History",
-//               style: TextStyle(
-//                 fontSize: 24,
-//                 fontWeight: FontWeight.bold,
-//               ),
-//             ),
-//           ),
-//           Expanded(
-//             child: ListView.builder(
-//               itemCount: historyItems.length,
-//               itemBuilder: (context, index) {
-//                 return Container(
-//                   margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
-//                   padding: EdgeInsets.all(16),
-//                   decoration: BoxDecoration(
-//                     borderRadius: BorderRadius.circular(10),
-//                     color: Colors.white,
-//                     boxShadow: [
-//                       BoxShadow(
-//                         color: Colors.grey.withOpacity(0.5),
-//                         blurRadius: 5,
-//                         offset: Offset(0, 3),
-//                       ),
-//                     ],
-//                   ),
-//                   child: Row(
-//                     children: [
-//                       Expanded(
-//                         flex: 2,
-//                         child: Image.asset(
-//                           historyItems[index].image,
-//                           fit: BoxFit.cover,
-//                         ),
-//                       ),
-//                       SizedBox(width: 16),
-//                       Expanded(
-//                         flex: 3,
-//                         child: Column(
-//                           crossAxisAlignment: CrossAxisAlignment.start,
-//                           children: [
-//                             Text(
-//                               historyItems[index].gymName,
-//                               style: TextStyle(
-//                                 fontSize: 18,
-//                                 fontWeight: FontWeight.bold,
-//                               ),
-//                             ),
-//                             SizedBox(height: 8),
-//                             Text(
-//                               historyItems[index].location,
-//                               style: TextStyle(
-//                                 fontSize: 14,
-//                               ),
-//                             ),
-//                             SizedBox(height: 8),
-//                             Text(
-//                               historyItems[index].date,
-//                               style: TextStyle(
-//                                 fontSize: 12,
-//                                 color: Colors.grey,
-//                               ),
-//                             ),
-//                           ],
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-//                 );
-//               },
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-// class HistoryItem {
-//   final String image;
-//   final String gymName;
-//   final String location;
-//   final String date;
-
-//   HistoryItem({
-//     required this.image,
-//     required this.gymName,
-//     required this.location,
-//     required this.date,
-//   });
-// }
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../RootAdmin/admin-gym-all-user-history.dart';
+import '../RootAdmin/admin-user-all-history.dart';
 import '../Utils/Constant.dart';
+import 'ownerhistory-2.dart';
 
 class OwnerHistoryPage extends StatefulWidget {
   @override
@@ -139,46 +15,44 @@ class OwnerHistoryPage extends StatefulWidget {
 }
 
 class _OwnerHistoryPageState extends State<OwnerHistoryPage> {
-  String username = "";
-  var id = '';
-  var gym = {
-    '1': 'Gym-1.jpg',
-    '2': 'Gym-2.jpg',
-    '3': 'Gym-3.jpg',
-    '4': 'Gym-4.jpg',
-    '5': 'Gym-5.jpg',
-    '6': 'Gym-6.jpg',
-    '7': 'Gym-7.jpg',
-  };
-  List<HistoryItem> historyItems = [];
+  bool _isLoading = false;
+  List<dynamic> _gyms = [];
 
-  Future<void> getHistoryData() async {
-    final prefs = await SharedPreferences.getInstance();
-    id = prefs.getString('id')!;
-    username = prefs.getString('name')!;
-    print(id + '  hai');
-    var url = Uri.parse('${Constant.url}/schedule/getDailyGymUser/' +
-        id); // Replace with your backend URL
-    var response = await http.get(url);
+  void _getGyms(String ownerEmail) async {
+    setState(() {
+      _isLoading = true;
+    });
+    final response = await http.get(
+        Uri.parse('${Constant.url}/gymInfo/ownerGymDetails/' + ownerEmail));
+
     if (response.statusCode == 200) {
-      print(response.statusCode);
+      final data = jsonDecode(response.body);
       setState(() {
-        historyItems = (json.decode(response.body) as List)
-            .map((data) => HistoryItem.fromJson(data))
-            .toList();
-        historyItems = historyItems.reversed.toList();
-        // var res = json.decode(response.body);
-        print(historyItems);
+        _gyms = data;
+        _isLoading = false;
       });
     } else {
-      print('Request failed with status: ${response.statusCode}.');
+      setState(() {
+        _isLoading = false;
+      });
+      // handle error
     }
   }
 
   @override
   void initState() {
     super.initState();
-    getHistoryData();
+    _fetchOwnerEmail();
+  }
+
+  void _fetchOwnerEmail() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final ownerEmail = prefs.getString('ownerEmail');
+    if (ownerEmail != null) {
+      _getGyms(ownerEmail);
+    } else {
+      // handle error
+    }
   }
 
   @override
@@ -186,140 +60,84 @@ class _OwnerHistoryPageState extends State<OwnerHistoryPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
         title: Center(
           child: Text(
-            "$username History",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 24,
-            ),
+            'Gym List',
+            style: TextStyle(color: Colors.black),
           ),
         ),
+        backgroundColor: Colors.white,
+        elevation: 0,
         iconTheme: IconThemeData(color: Colors.black),
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Padding(
-          //   padding: const EdgeInsets.all(16.0),
-          //   child: Text(
-          //     "$username's History",
-          //     style: TextStyle(
-          //       fontSize: 24,
-          //       fontWeight: FontWeight.bold,
-          //     ),
-          //   ),
-          // ),
+          SizedBox(height: 16.0),
           Expanded(
-            child: ListView.builder(
-              itemCount: historyItems.length,
-              itemBuilder: (context, index) {
-                return Container(
-                  margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                  padding: EdgeInsets.all(11),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        blurRadius: 5,
-                        offset: Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(
-                              11.0), // Adjust the radius as per your requirement
-                          child: Image.asset(
-                            'assets/images/' + historyItems[index].picNo,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 21),
-                      Expanded(
-                        flex: 3,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              historyItems[index].gymName,
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              historyItems[index].location,
-                              style: TextStyle(
-                                fontSize: 14,
-                              ),
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              historyItems[index].date,
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              historyItems[index].time,
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey,
-                              ),
+            child: _isLoading
+                ? Center(child: CircularProgressIndicator())
+                : ListView.builder(
+                    itemCount: _gyms.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final gym = _gyms[index];
+                      return Container(
+                        margin: EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 16.0),
+                        padding: EdgeInsets.all(11.0),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              spreadRadius: 1,
+                              blurRadius: 2,
+                              offset:
+                                  Offset(0, 1), // changes position of shadow
                             ),
                           ],
+                          borderRadius: BorderRadius.circular(10.0),
                         ),
-                      ),
-                    ],
+                        child: ListTile(
+                          leading: Image.network(gym['Image']),
+                          title: Text(gym['gymName']),
+                          subtitle: Text('${gym['City']}, ${gym['State']}'),
+                          trailing: ElevatedButton(
+                            onPressed: () {
+                              print(gym['gymName']);
+                              print(gym['ownerEmail']);
+                              var space = " " + "," + " ";
+                              var location = gym['City'] + space + gym['State'];
+                              print(location);
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => OwnerGymHistory(
+                                        ownerEmail: gym['ownerEmail'],
+                                        gymName: gym['gymName'],
+                                        location: location)),
+                              );
+                              // navigate to history page
+                            },
+                            child: Text('History'),
+                            // style: TextButton.styleFrom(
+                            //   primary: Colors.black,
+                            //   backgroundColor: Colors.white,
+                            //   side: BorderSide(color: Colors.black),
+                            // ),
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Colors
+                                  .black, //set the background color to black
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           ),
         ],
       ),
-    );
-  }
-}
-
-class HistoryItem {
-  final String picNo;
-  final String gymName;
-  final String location;
-  final String date;
-  final String time; // Add this line
-
-  HistoryItem({
-    // required this.image,
-    required this.gymName,
-    required this.location,
-    required this.date,
-    required this.time,
-    required this.picNo, // Add this line
-  });
-
-  factory HistoryItem.fromJson(Map<String, dynamic> json) {
-    return HistoryItem(
-      // image: json[''],
-
-      gymName: json['gymName'], // Change this line to match your response key
-      location: json['location'] ?? " ",
-      date: json['date'] ?? " ",
-      time: json['time'] ?? " ",
-      picNo: json['picNo'] ?? "0",
-      // Add this line and set default value to empty string if null
     );
   }
 }

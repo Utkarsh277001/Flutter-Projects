@@ -201,15 +201,7 @@ class GymListPage extends StatelessWidget {
                                 var location =
                                     gym['City'] + space + gym['State'];
                                 print(location);
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) => GymUserHistoryPage(
-                                //       userEmail: selectedUser.email,
-                                //       name: selectedUser.name,
-                                //     ),
-                                //   ),
-                                // );
+
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(

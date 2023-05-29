@@ -117,28 +117,29 @@ const UserRecordForSuperAdmin = async (req, res) => {
   }
 }
 
-// const GymHistoryRecordForSuperAdmin =  async (req, res) => {
-//   const ownerEmail = req.params.ownerEmail;
-//   const gymName = req.params.gymName;
-//   const location = req.params.location;
+const GymHistoryRecordForGymOwner =  async (req, res) => {
+  const ownerEmail = req.params.ownerEmail;
+  const gymName = req.params.gymName;
+  const location = req.params.location;
 
-//   try {
-//     const gyms = await dailyGym.find({
-//       ownerEmail: ownerEmail,
-//       gymName: gymName,
-//       location: location,
-//     }).exec();
+  try {
+    const gyms = await dailyGym.find({
+      ownerEmail: ownerEmail,
+      gymName: gymName,
+      location: location,
+      Visited:true,
+    }).exec();
 
-//     if (!gyms || gyms.length === 0) {
-//       return res.status(404).json({ msg: "No gyms found" });
-//     }
+    if (!gyms || gyms.length === 0) {
+      return res.status(404).json({ msg: "No gyms found" });
+    }
 
-//     res.status(200).json(gyms);
-//   } catch (error) {
-//     console.log("Error while getting gym: ", error.message);
-//     res.status(500).json({ msg: "Error while getting gym" });
-//   }
-// }
+    res.status(200).json(gyms);
+  } catch (error) {
+    console.log("Error while getting gym: ", error.message);
+    res.status(500).json({ msg: "Error while getting gym" });
+  }
+}
 const GymHistoryRecordForSuperAdmin = async (req, res) => {
   const ownerEmail = req.params.ownerEmail;
   const gymName = req.params.gymName;
@@ -184,4 +185,4 @@ const getUser = async (req, res) => {
 
 
 
-module.exports={getStats,getAllUsers,getSubscriptionDataByEmail,getAllGyms,gymOwners,RegisterGymofOwner,UserRecordForSuperAdmin,GymHistoryRecordForSuperAdmin,getUser}
+module.exports={getStats,getAllUsers,getSubscriptionDataByEmail,getAllGyms,gymOwners,RegisterGymofOwner,UserRecordForSuperAdmin,GymHistoryRecordForSuperAdmin,getUser,GymHistoryRecordForGymOwner}
