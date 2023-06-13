@@ -17,6 +17,15 @@ class _SuperAdminHomePageState extends State<SuperAdminHomePage> {
   int _users = 0;
   int _totalGymOwners = 0;
 
+  final List<String> _images = [
+    'assets/images2/user-admin-1.jpg',
+    'assets/images2/Mobile-login.jpg',
+    'assets/images2/user-admin-2.jpg',
+    'assets/images2/user-admin-3.jpg',
+  ];
+
+  int _currentIndex = 0;
+
   @override
   void initState() {
     super.initState();
@@ -38,17 +47,34 @@ class _SuperAdminHomePageState extends State<SuperAdminHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
           Container(
+            // height: size.height / .6,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/Gym-15.jpg'),
-                fit: BoxFit.cover,
+                image: AssetImage('assets/images2/analyze-2.jpg'),
+                // fit: BoxFit.cover,
               ),
             ),
           ),
+          // AnimatedSwitcher(
+          //     duration: Duration(milliseconds: 300),
+          //     child: Container(
+          //       key: ValueKey<int>(_currentIndex),
+          //       height: size.height / 1.6,
+          //       width: size.width,
+          //       decoration: BoxDecoration(
+          //         image: DecorationImage(
+          //           image: AssetImage(_images[_currentIndex]),
+          //           fit: BoxFit.cover,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -58,7 +84,7 @@ class _SuperAdminHomePageState extends State<SuperAdminHomePage> {
                 style: TextStyle(
                   fontSize: 48,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
               SizedBox(height: 8),
@@ -67,7 +93,7 @@ class _SuperAdminHomePageState extends State<SuperAdminHomePage> {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.normal,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
               Spacer(),
@@ -75,11 +101,20 @@ class _SuperAdminHomePageState extends State<SuperAdminHomePage> {
               SizedBox(height: 100),
               Expanded(
                 child: Container(
+                  height: double.infinity,
                   width: double.infinity,
                   margin: const EdgeInsets.all(21.0),
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.9),
                     borderRadius: BorderRadius.circular(40),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color.fromARGB(255, 75, 75, 75).withOpacity(0.5),
+                        spreadRadius: .5,
+                        blurRadius: 3,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(

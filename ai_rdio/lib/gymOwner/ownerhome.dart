@@ -25,7 +25,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
     super.initState();
     EasyLoading.show(status: 'Loading Gym details...');
     _getGyms();
-  }
+  } 
 
   Future<void> _getGyms() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

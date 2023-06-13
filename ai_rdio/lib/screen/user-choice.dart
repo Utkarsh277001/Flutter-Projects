@@ -2,6 +2,8 @@ import 'package:ai_rdio/gymOwner/owner-login.dart';
 import 'package:ai_rdio/screen/RegLoginUi.dart';
 import 'package:flutter/material.dart';
 
+import '../RootAdmin/admin-login.dart';
+
 class Userchoice extends StatefulWidget {
   @override
   _UserchoiceState createState() => _UserchoiceState();
@@ -64,7 +66,7 @@ class _UserchoiceState extends State<Userchoice> {
               ),
             ),
             SizedBox(
-              height: size.height / 33,
+              height: size.height / 39,
             ),
             Column(
               children: [
@@ -81,19 +83,42 @@ class _UserchoiceState extends State<Userchoice> {
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 7,
                 ),
                 Container(
                   width: size.width / 1.15,
-                  child: Text(
-                    "Login/Signup as",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 24,
-                      // fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                  // child: Text(
+                  //   "Login/Signup as",
+                  //   textAlign: TextAlign.center,
+                  //   style: TextStyle(
+                  //     fontSize: 24,
+                  //     // fontWeight: FontWeight.bold,
+                  //     color: Colors.black,
+                  //   ),
+                  // ),
+                  child: Column(children: [
+                    Text(
+                      "Login/Signup as",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 24,
+                        // fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
+                    // Icon(Icons.account_box)
+                    GestureDetector(
+                      onTap: () {
+                        print("Admin button clicked");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AdminRegLoginUi()),
+                        );
+                      },
+                      child: Icon(Icons.account_circle),
+                    )
+                  ]),
                 ),
                 SizedBox(height: 12),
                 Row(

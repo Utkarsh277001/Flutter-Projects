@@ -30,6 +30,7 @@ app.use(express.json());
 app.get("/",(req,res)=>{
     res.send("hello");
 })
+
 app.use("/gymInfo",gymDetailsrouter);
 app.use("/api",userRouter);
 app.use("/subscription",subscriptionRouter);
