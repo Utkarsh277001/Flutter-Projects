@@ -166,16 +166,16 @@ class _NavBarState extends State<NavBar> {
           //     print("share");
           //   },
           // ),
-          ListTile(
-            leading: Icon(Icons.admin_panel_settings_sharp),
-            title: Text('admin panel'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SuperAdminMainPage()),
-              );
-            },
-          ),
+          // ListTile(
+          //   leading: Icon(Icons.admin_panel_settings_sharp),
+          //   title: Text('admin panel'),
+          //   onTap: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(builder: (context) => SuperAdminMainPage()),
+          //     );
+          //   },
+          // ),
           // ListTile(
           //   leading: Icon(Icons.settings),
           //   title: Text('Settings'),

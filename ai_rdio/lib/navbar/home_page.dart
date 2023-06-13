@@ -32,6 +32,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
     "biceps-curl-stand.jpg": {'name': 'Biceps', 'link': '/BicepsExercisePage'},
     "lat-pull.png": {'name': 'Back', 'link': '/MeditationExercisePage'},
     "flat-bench-press.png": {'name': 'Chest', 'link': '/PullExercisePage'}
+
     // "run-duo.png": "run-duo",
     // "run.png": "run"
   };
@@ -52,40 +53,6 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
       print('Request failed with ${response.statusCode}.');
     }
   }
-
-  var gym = {
-    'Gym-1.jpg': {
-      'no.': 1,
-      'name': "Fitness Zone",
-      'address': 'Jalandhar , Punjab'
-    },
-    'Gym-2.jpg': {'no.': 2, 'name': "Muscle Mansion", 'address': 'Chandigarh'},
-    'Gym-3.jpg': {
-      'no.': 3,
-      'name': "Health Heaven",
-      'address': 'Hamirpur, Himachal Pradesh'
-    },
-    'Gym-4.jpg': {
-      'no.': 4,
-      'name': "Fit Elite Gym",
-      'address': 'Patna , Bihar'
-    },
-    'Gym-5.jpg': {
-      'no.': 5,
-      'name': "Fitness Fusion",
-      'address': 'Dehradun , Uttrakhand'
-    },
-    'Gym-6.jpg': {
-      'no.': 6,
-      'name': "Fitness Club",
-      'address': 'Kapurthala , Punjab'
-    },
-    'Gym-7.jpg': {
-      'no.': 7,
-      'name': "Anytime Fitness",
-      'address': 'Vasai , Mumbai'
-    },
-  };
 
   var inspiration = {
     "gaurav-taneja.png": {
@@ -253,7 +220,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                             builder: (context) => GymListScreen()));
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.black,
+                    primary: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
@@ -261,9 +228,13 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.search),
+                      Icon(
+                        Icons.search,
+                        color: Colors.black,
+                      ),
                       Text('Search More gyms',
-                          style: TextStyle(fontStyle: FontStyle.italic)),
+                          style: TextStyle(
+                              fontStyle: FontStyle.italic, color: Colors.grey)),
                     ],
                   ),
                 ),

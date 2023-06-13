@@ -16,25 +16,25 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final List<Data> data = [
     Data(
-      imageUrl: "assets/images/cardio-cover.jpg",
+      imageUrl: "assets/exercise/cycling.gif",
       heading: "Cardio",
       time: "1 Hours",
       exercises: "4 exercises",
     ),
     Data(
-      imageUrl: "assets/images/arms-cover.jpg",
+      imageUrl: "assets/exercise/wristcurl.gif",
       heading: "Arms",
       time: "1 Hours",
       exercises: "4 exercises",
     ),
     Data(
-      imageUrl: "assets/images/flat-bench-press.png",
+      imageUrl: "assets/exercise/benchpress.gif",
       heading: "Chest",
       time: "1 Hours",
       exercises: "4 exercises",
     ),
     Data(
-      imageUrl: "assets/images/lat-pull.png",
+      imageUrl: "assets/exercise/pull.gif",
       heading: "Back",
       time: "1 Hours",
       exercises: "4 exercises",
@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
       exercises: "4 exercises",
     ),
     Data(
-      imageUrl: "assets/exercise/jumpsquat.gif",
+      imageUrl: "assets/exercise/dumbbelllateralraise.gif",
       heading: "Shoulder",
       time: "1 Hours",
       exercises: "4 exercises",

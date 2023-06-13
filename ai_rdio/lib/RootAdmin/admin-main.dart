@@ -1,3 +1,4 @@
+import 'package:ai_rdio/RootAdmin/admin-profile.dart';
 import 'package:ai_rdio/navbar/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -21,6 +22,7 @@ class SuperAdminMainPage extends StatefulWidget {
 class _SuperAdminMainPageState extends State<SuperAdminMainPage> {
   List pages = [
     SuperAdminHomePage(),
+    AdminProfilePage()
     // AdminHomePage(),
     // OwnerHistoryPage(),
     // GetStarted(),
@@ -50,7 +52,7 @@ class _SuperAdminMainPageState extends State<SuperAdminMainPage> {
           elevation: 0,
           items: [
             BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home)),
-            BottomNavigationBarItem(label: "Bar", icon: Icon(Icons.history)),
+            BottomNavigationBarItem(label: "Bar", icon: Icon(Icons.person)),
             // BottomNavigationBarItem(label: "Search", icon: Icon(Icons.explore)),
             // BottomNavigationBarItem(label: "My", icon: Icon(Icons.person)),
           ]),
