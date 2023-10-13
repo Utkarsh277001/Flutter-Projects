@@ -112,17 +112,17 @@ class _NavBarState extends State<NavBar> {
               print("history");
             },
           ),
-          ListTile(
-            leading: Icon(Icons.data_object_rounded),
-            title: Text('GymDetails'),
-            onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => GymRegistrationPage()),
-              // );
-              print("history");
-            },
-          ),
+          // ListTile(
+          //   leading: Icon(Icons.data_object_rounded),
+          //   title: Text('GymDetails'),
+          //   onTap: () {
+          //     // Navigator.push(
+          //     //   context,
+          //     //   MaterialPageRoute(builder: (context) => GymRegistrationPage()),
+          //     // );
+          //     print("history");
+          //   },
+          // ),
           ListTile(
             leading: Icon(Icons.money),
             title: Text('Subscription'),
