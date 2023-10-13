@@ -136,7 +136,7 @@ class _BuyServicePlanPageState extends State<BuyServicePlanPage> {
                 scrollDirection: Axis.horizontal,
                 children: [
                   ServicePlanCard(
-                    cardImage: 'assets/images/Gym-1.jpg',
+                    cardImage: 'assets/images/debit-card.png',
                     billAmount: 820,
                     gst: 180,
                     sub_no: 1,
@@ -147,7 +147,7 @@ class _BuyServicePlanPageState extends State<BuyServicePlanPage> {
                         "Access to gym equipment and facilities. No additional perks and benefits.",
                   ),
                   ServicePlanCard(
-                      cardImage: 'assets/images/Gym-2.jpg',
+                      cardImage: 'assets/images/debit-card.png',
                       billAmount: 1640,
                       gst: 360,
                       sub_no: 2,
@@ -157,7 +157,7 @@ class _BuyServicePlanPageState extends State<BuyServicePlanPage> {
                       description:
                           "Access to premium services like steam bath , hot tubs , ice bath and other services"),
                   ServicePlanCard(
-                      cardImage: 'assets/images/Gym-3.jpg',
+                      cardImage: 'assets/images/debit-card.png',
                       billAmount: 2460,
                       gst: 540,
                       sub_no: 3,
