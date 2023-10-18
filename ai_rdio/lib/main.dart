@@ -2,7 +2,6 @@ import 'package:ai_rdio/Exercise/cardio.dart';
 import 'package:ai_rdio/screen/RegLoginUi.dart';
 import 'package:ai_rdio/screen/Regis.dart';
 import 'package:ai_rdio/screen/splash2.dart';
-import 'package:ai_rdio/screen/splashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';

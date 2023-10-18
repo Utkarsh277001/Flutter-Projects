@@ -1,6 +1,7 @@
 import 'package:ai_rdio/navbar/chat_screen.dart';
 
 import 'package:ai_rdio/navbar/payscreen.dart';
+import 'package:ai_rdio/navbar/slot.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -141,6 +142,18 @@ class _NavBarState extends State<NavBar> {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => AboutPage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.info),
+            title: Text('slot counter'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        SlotCounter(totalSlots: 120, availableSlots: 70)),
               );
             },
           ),

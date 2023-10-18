@@ -1,4 +1,5 @@
 import 'package:ai_rdio/navbar/payscreen.dart';
+import 'package:ai_rdio/navbar/slot.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -36,6 +37,12 @@ class _GymPageDateState extends State<GymPageDate> {
   };
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = TimeOfDay.now();
+  String selectedHour = '10:00 AM'; // Initialize with a default value
+
+  List<String> hourOptions = [
+    '10:00 AM', '11:00 AM', '12:00 PM',
+    '1:00 PM', '2:00 PM', '3:00 PM', // Add more options as needed
+  ];
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -193,15 +200,27 @@ class _GymPageDateState extends State<GymPageDate> {
                             ],
                           ),
                         ),
-                        InkWell(
-                          onTap: () => _selectTime(context),
+                        Container(
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.access_time),
-                              SizedBox(height: 5),
+                              DropdownButton<String>(
+                                value: selectedHour,
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    selectedHour = newValue!;
+                                  });
+                                },
+                                items: hourOptions
+                                    .map<DropdownMenuItem<String>>(
+                                        (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                              ),
                               Text(
-                                selectedTime.format(context),
+                                'Selected Hour: $selectedHour',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16.0,
@@ -210,6 +229,23 @@ class _GymPageDateState extends State<GymPageDate> {
                             ],
                           ),
                         ),
+                        // InkWell(
+                        //   onTap: () => _selectTime(context),
+                        //   child: Column(
+                        //     mainAxisAlignment: MainAxisAlignment.center,
+                        //     children: [
+                        //       Icon(Icons.access_time),
+                        //       SizedBox(height: 5),
+                        //       Text(
+                        //         selectedTime.format(context),
+                        //         style: TextStyle(
+                        //           fontWeight: FontWeight.bold,
+                        //           fontSize: 16.0,
+                        //         ),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
@@ -237,24 +273,30 @@ class _GymPageDateState extends State<GymPageDate> {
                   color: Colors.white,
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(11.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Center(
-                            child: Text(
-                              "Easy, reliable way to take care of you health",
-                              textAlign: TextAlign.center,
-                              softWrap:
-                                  true, //enable text to wrap to next line if it exceeds the container width
-                              overflow: TextOverflow.visible,
-                              style: TextStyle(
-                                  fontSize: 21, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                      ]),
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // Expanded(
+                      //   child: Center(
+                      //     child: Text(
+                      //       "Easy, reliable way to take care of your health",
+                      //       textAlign: TextAlign.center,
+                      //       softWrap:
+                      //           true, // enable text to wrap to the next line if it exceeds the container width
+                      //       overflow: TextOverflow.visible,
+                      //       style: TextStyle(
+                      //           fontSize: 21, fontWeight: FontWeight.bold),
+                      //     ),
+                      //   ),
+                      // ),
+                      // Add SlotCounter to display the available slots
+                      SlotCounter(
+                        totalSlots: 100, // Total number of slots
+                        availableSlots: 42, // Available slots
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

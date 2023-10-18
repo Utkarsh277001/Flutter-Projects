@@ -41,6 +41,11 @@ const gymsData=mongoose.Schema({
         type:String,
         
     }
+    ,totalCapacity:{
+        required:true,
+        type:Number,
+    },
+    
 
 },{collection:'gymdata'});
 
