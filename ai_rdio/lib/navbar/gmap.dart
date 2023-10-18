@@ -1,36 +1,13 @@
 // import 'package:flutter/material.dart';
 // import 'package:google_maps_flutter/google_maps_flutter.dart';
-
-// class MapPage extends StatefulWidget {
-//   @override
-//   _MapPageState createState() => _MapPageState();
-// }
-
-// class _MapPageState extends State<MapPage> {
-//   static const LatLng _pGooglePlex = LatLng(31.352889, 75.454328);
-//   static const LatLng _pDesPlex = LatLng(31.352889, 75.454328);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     // The build method can be left empty or with a comment.
-//     // It doesn't return anything, but the framework requires the method to exist.
-//     return Scaffold(
-//         body: GoogleMap(
-//             initialCameraPosition: CameraPosition(
-//               target: _pGooglePlex,
-//               zoom: 200,
-//             ),
-//             markers: {}));
-//   }
-// }
-
-// ///fine code
-// import 'package:flutter/material.dart';
-// import 'package:google_maps_flutter/google_maps_flutter.dart';
 // import 'package:geolocator/geolocator.dart';
 // import 'package:geocoding/geocoding.dart';
 
 // class MapPage extends StatefulWidget {
+//   final double latitude;
+//   final double longitude;
+
+//   MapPage({required this.latitude, required this.longitude});
 //   @override
 //   _MapPageState createState() => _MapPageState();
 // }
@@ -38,12 +15,25 @@
 // class _MapPageState extends State<MapPage> {
 //   late GoogleMapController mapController;
 //   TextEditingController searchController = TextEditingController();
-//   late LatLng currentLocation = LatLng(0, 0); // Initialize with a default value
+
+//   late LatLng currentLocation =
+//       // 31.351879, 75.462716
+//       LatLng(
+//           widget.latitude, widget.longitude); // Initialize with a default value
 //   Set<Marker> markers = Set();
+
+//   List<Marker> _marker = [];
+//   final List<Marker> _list = const [
+//     Marker(
+//         markerId: MarkerId('1'),
+//         position: mark,
+//         infoWindow: InfoWindow(title: "My Position"))
+//   ];
 
 //   @override
 //   void initState() {
 //     super.initState();
+//     _marker.addAll(_list);
 //     _getCurrentLocation();
 //   }
 
@@ -68,7 +58,6 @@
 //             ),
 //           ),
 //         ),
-
 //         iconTheme: IconThemeData(color: Colors.black),
 //       ),
 //       body: Column(
@@ -93,17 +82,27 @@
 //               onTap: (LatLng location) {
 //                 _addMarker(location);
 //               },
-//               markers: markers,
+//               markers: Set<Marker>.of(_marker),
 //             ),
 //           ),
 //           Padding(
 //             padding: const EdgeInsets.all(8.0),
 //             child: ElevatedButton(
 //               onPressed: () {
+//                 print("location---> of gym register page"
+//                     'Latitude: ${currentLocation.latitude}, Longitude: ${currentLocation.longitude}');
 //                 _saveLocationAndNavigateBack();
 //                 print(currentLocation);
 //               },
 //               child: Text('Submit'),
+//               style: ElevatedButton.styleFrom(
+//                 backgroundColor: Colors.black,
+//                 shape: RoundedRectangleBorder(
+//                   borderRadius: BorderRadius.circular(21.0),
+//                 ),
+//                 padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
+//                 minimumSize: Size(250, 50),
+//               ),
 //             ),
 //           ),
 //         ],
@@ -166,11 +165,12 @@
 //     if (currentLocation != null) {
 //       // Perform any save logic here (e.g., save currentLocation to a variable)
 //       // In this example, we'll print the coordinates
-//       print(
-//           'Latitude: ${currentLocation.latitude}, Longitude: ${currentLocation.longitude}');
 
-//       // Navigate back to the previous page
-//       Navigator.pop(context);
+//       // Pass the selected location back to the previous page
+//       Navigator.pop(
+//         context,
+//         currentLocation,
+//       );
 //     } else {
 //       // Handle case where location is not available
 //       print('Location not available');
@@ -178,13 +178,16 @@
 //   }
 // }
 
-import 'package:ai_rdio/navbar/history.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 
 class MapPage extends StatefulWidget {
+  final double latitude;
+  final double longitude;
+
+  MapPage({required this.latitude, required this.longitude});
   @override
   _MapPageState createState() => _MapPageState();
 }
@@ -192,13 +195,24 @@ class MapPage extends StatefulWidget {
 class _MapPageState extends State<MapPage> {
   late GoogleMapController mapController;
   TextEditingController searchController = TextEditingController();
-  late LatLng currentLocation =
-      LatLng(31.3521524, 75.4594298); // Initialize with a default value
+
+  late LatLng currentLocation = LatLng(
+      widget.latitude, widget.longitude); // Initialize with a default value
   Set<Marker> markers = Set();
+  List<Marker> _marker = [];
+  final List<Marker> _list = [];
 
   @override
   void initState() {
     super.initState();
+    _list.addAll([
+      Marker(
+        markerId: MarkerId('1'),
+        position: LatLng(widget.latitude, widget.longitude),
+        infoWindow: InfoWindow(title: "Target Gym"),
+      ),
+    ]);
+    _marker.addAll(_list);
     _getCurrentLocation();
   }
 
@@ -247,25 +261,7 @@ class _MapPageState extends State<MapPage> {
               onTap: (LatLng location) {
                 _addMarker(location);
               },
-              markers: markers,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () {
-                _saveLocationAndNavigateBack();
-                print(currentLocation);
-              },
-              child: Text('Submit'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(21.0),
-                ),
-                padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
-                minimumSize: Size(250, 50),
-              ),
+              markers: Set<Marker>.of(_marker),
             ),
           ),
         ],
@@ -318,7 +314,7 @@ class _MapPageState extends State<MapPage> {
     markers.add(
       Marker(
         markerId: MarkerId('selected_location'),
-        position: location,
+        position: currentLocation, // Use currentLocation as the marker position
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
       ),
     );
@@ -328,17 +324,11 @@ class _MapPageState extends State<MapPage> {
     if (currentLocation != null) {
       // Perform any save logic here (e.g., save currentLocation to a variable)
       // In this example, we'll print the coordinates
-      print("location--->"
-          'Latitude: ${currentLocation.latitude}, Longitude: ${currentLocation.longitude}');
 
-      // Navigate back to the previous page
-      // Navigator.pop(context);
-      Navigator.push(
+      // Pass the selected location back to the previous page
+      Navigator.pop(
         context,
-        MaterialPageRoute(
-          builder: (context) =>
-              HistoryPage(), // Replace 'NextPage' with the actual next page class
-        ),
+        currentLocation,
       );
     } else {
       // Handle case where location is not available

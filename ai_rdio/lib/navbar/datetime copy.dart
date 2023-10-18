@@ -150,6 +150,7 @@ class _GymPageDateState extends State<GymPageDate3> {
                           SizedBox(width: 5),
                           Text(
                             widget.gymDetail.location,
+                            // widget.gymDetail.coordinates,
                             style: TextStyle(
                               fontSize: 20,
                               color: Colors.white,
