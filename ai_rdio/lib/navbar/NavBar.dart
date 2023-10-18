@@ -1,4 +1,5 @@
 import 'package:ai_rdio/navbar/chat_screen.dart';
+import 'package:ai_rdio/navbar/gmap.dart';
 
 import 'package:ai_rdio/navbar/payscreen.dart';
 import 'package:flutter/material.dart';
@@ -205,6 +206,16 @@ class _NavBarState extends State<NavBar> {
               prefs.remove('eDate');
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) => Userchoice()));
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.info),
+            title: Text('location-1'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MapPage()),
+              );
             },
           ),
         ],

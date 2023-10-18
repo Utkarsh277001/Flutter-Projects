@@ -40,7 +40,19 @@ const gymsData=mongoose.Schema({
         required:true,
         type:String,
         
-    }
+    },
+    location: {
+      type: {
+        type: String,
+        enum: ["Point"], // Only 'Point' type is supported for GeoJSON
+        required: true,
+      },
+      coordinates: {
+        type: [Number], // Array of [longitude, latitude] for GeoJSON
+        required: true,
+      },
+    },
+
 
 },{collection:'gymdata'});
 
