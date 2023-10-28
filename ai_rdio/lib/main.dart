@@ -6,11 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-
 import 'Exercise/meditation.dart';
 import 'Exercise/pilates.dart';
 import 'Exercise/pull-up.dart';
-import 'navbar/datetime.dart';
 
 void main() async {
   runApp(const MyApp());

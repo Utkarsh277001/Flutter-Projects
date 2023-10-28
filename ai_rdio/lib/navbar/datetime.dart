@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:ai_rdio/navbar/payscreen.dart';
-import 'package:ai_rdio/navbar/slot.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:ai_rdio/Services/dailyGym.dart';
@@ -11,6 +14,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../Utils/Constant.dart';
 import '../Utils/Dialog.dart';
 import 'home_page.dart';
+
+class SlotData extends ChangeNotifier {
+  int totalSlots;
+  int availableSlots;
+
+  SlotData({required this.totalSlots, required this.availableSlots});
+
+  void updateData({required int totalSlots, required int availableSlots}) {
+    this.totalSlots = totalSlots;
+    this.availableSlots = availableSlots;
+    notifyListeners(); // Notify listeners when the data changes
+  }
+}
 
 class GymPageDate extends StatefulWidget {
   // ignore: prefer_typing_uninitialized_variables
@@ -37,11 +53,18 @@ class _GymPageDateState extends State<GymPageDate> {
   };
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = TimeOfDay.now();
-  String selectedHour = '10:00 AM'; // Initialize with a default value
+  int gymslot = 0;
+  int total = 0;
+  String selectedHour =
+      '10:00 AM - 11:00 AM'; // Initialize with a default value
 
   List<String> hourOptions = [
-    '10:00 AM', '11:00 AM', '12:00 PM',
-    '1:00 PM', '2:00 PM', '3:00 PM', // Add more options as needed
+    // '10', '20', '30'
+    '10:00 AM - 11:00 AM',
+    '11:00 AM - 12:00 PM', '12:00 PM - 1:00 PM',
+    '1:00 PM - 2:00 PM', '2:00 PM - 3:00 PM', '3:00 PM - 4:00 PM',
+    '4:00 PM - 5:00 PM', '5:00 PM - 6:00 PM',
+    '6:00 PM - 7:00 PM', '7:00 PM - 9:00 PM' // Add more options as needed
   ];
 
   Future<void> _selectDate(BuildContext context) async {
@@ -110,10 +133,42 @@ class _GymPageDateState extends State<GymPageDate> {
     }
   }
 
+  Future<void> slotcheck(String date, String time, String gymname) async {
+    EasyLoading.show(status: 'Checking Slots...');
+    try {
+      http.Response res = await http.post(
+        Uri.parse('${Constant.url}/schedule/slotdata'),
+        body: jsonEncode({
+          'date': date,
+          'time': time,
+          'gymName': gymname,
+        }),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+      );
+      if (res.statusCode == 200) {
+        EasyLoading.showSuccess('slot fetched');
+        EasyLoading.dismiss();
+        final data = jsonDecode(res.body);
+        print("Api called");
+        setState(() {
+          gymslot = data['slotBooked'];
+          int available = total - gymslot;
+        });
+      } else {
+        EasyLoading.dismiss();
+      }
+    } catch (e) {}
+  }
+
   @override
   Widget build(BuildContext context) {
+    final SlotData slotData = SlotData(totalSlots: 100, availableSlots: 50);
     String date = DateFormat.yMd().format(selectedDate);
-    String time = selectedTime.format(context);
+    String time = selectedHour;
+    total = int.parse(widget.gymDetail.capacity);
+    int available = total - gymslot;
 
     return Scaffold(
       backgroundColor: Colors.grey[200],
@@ -208,6 +263,8 @@ class _GymPageDateState extends State<GymPageDate> {
                                 onChanged: (String? newValue) {
                                   setState(() {
                                     selectedHour = newValue!;
+                                    slotcheck(date, selectedHour,
+                                        widget.gymDetail.gymName);
                                   });
                                 },
                                 items: hourOptions
@@ -220,7 +277,7 @@ class _GymPageDateState extends State<GymPageDate> {
                                 }).toList(),
                               ),
                               Text(
-                                'Selected Hour: $selectedHour',
+                                'Select slots',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16.0,
@@ -291,10 +348,45 @@ class _GymPageDateState extends State<GymPageDate> {
                       //   ),
                       // ),
                       // Add SlotCounter to display the available slots
-                      SlotCounter(
-                        totalSlots: 100, // Total number of slots
-                        availableSlots: 42, // Available slots
-                      ),
+                      AnimatedBuilder(
+                          animation: slotData,
+                          builder: (context, child) {
+                            return Center(
+                              child: DefaultTextStyle(
+                                style: TextStyle(
+                                  fontSize: 36,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      'Available Slots',
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Text(
+                                          '${available}',
+                                          style: TextStyle(
+                                            fontSize: 36,
+                                            color:
+                                                Color.fromARGB(244, 57, 255, 7),
+                                          ),
+                                        ),
+                                        Text(
+                                          ' / ${total}',
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          })
                     ],
                   ),
                 ),

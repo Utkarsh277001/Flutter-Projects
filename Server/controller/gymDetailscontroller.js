@@ -8,38 +8,82 @@ cloudinary.config({
     api_key:'988655655774785',
     api_secret:'yMoALeZ9dILSTRBXbHG2-0RB8f4'
 })
-
-const GymData=async(req,res)=>{
-     console.log(req.body);
-    try {
-        let Validation={ownerEmail:req.body.ownerEmail,gymName:req.body.gymName};
-        let data= await gymdata.find(Validation);
-         console.log(data);
-        if(Array.isArray(data)&&data.length!=0){
-            return res.status(400).json({msg:"Already Added"});
-        }
-         const file=req.files.Photo;
-    cloudinary.uploader.upload(file.tempFilePath,(err,result)=>{console.log(result);
-    const datas = new gymdata({
+const GymData = async (req, res) => {
+  console.log(req.body);
+  try {
+    let Validation = {
       ownerEmail: req.body.ownerEmail,
       gymName: req.body.gymName,
-      City: req.body.City,
-      State: req.body.State,
-      perDayRate: req.body.perDayRate,
-      Image: result.url,
-      contactDetails: req.body.contactDetails,
-    });
+    };
 
-    datas.save().then(() => {
-      res.status(200).json({ msg: "Successfully uploaded" });
-    });
-    });
-        
-    } catch (error) {
-        res.status(400).json(error);
+    let data = await gymdata.find(Validation);
+    console.log(data);
+
+    if (Array.isArray(data) && data.length !== 0) {
+      return res.status(400).json({ msg: "Already Added" });
     }
+
+    const file = req.files.Photo;
+    cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
+      console.log(result);
+      const datas = new gymdata({
+        ownerEmail: req.body.ownerEmail,
+        gymName: req.body.gymName,
+        City: req.body.City,
+        State: req.body.State,
+        perDayRate: req.body.perDayRate,
+        totalCapacity:req.body.totalCapacity,
+        Image: result.url,
+        contactDetails: req.body.contactDetails,
+        location: {
+          type: "Point",
+          coordinates: [parseFloat(req.body.longitude), parseFloat(req.body.latitude)],
+        },
+      });
+
+      datas.save().then(() => {
+        res.status(200).json({ msg: "Successfully uploaded" });
+      });
+    });
+  } catch (error) {
+    res.status(400).json(error);
+  }
+};
+
+
+// const GymData=async(req,res)=>{
+//      console.log(req.body);
+//     try {
+//         let Validation={ownerEmail:req.body.ownerEmail,gymName:req.body.gymName};
+//         let data= await gymdata.find(Validation);
+//          console.log(data);
+//         if(Array.isArray(data)&&data.length!=0){
+//             return res.status(400).json({msg:"Already Added"});
+//         }
+//          const file=req.files.Photo;
+//     cloudinary.uploader.upload(file.tempFilePath,(err,result)=>{console.log(result);
+//     const datas = new gymdata({
+//       ownerEmail: req.body.ownerEmail,
+//       gymName: req.body.gymName,
+//       City: req.body.City,
+//       State: req.body.State,
+//       perDayRate: req.body.perDayRate,
+//       Image: result.url,
+//       contactDetails: req.body.contactDetails,
+      
+      
+//     });
+
+//     datas.save().then(() => {
+//       res.status(200).json({ msg: "Successfully uploaded" });
+//     });
+//     });
+        
+//     } catch (error) {
+//         res.status(400).json(error);
+//     }
    
-}
+// }
 
 const searchCity=async(req,res)=>{
 
@@ -73,6 +117,7 @@ const allGym=async (req,res)=>{
     try {
    const data = await gymdata.find();
     res.status(200).json(data);
+    console.log(data);
   } catch (error) {
     console.log("error while retrieving gym data ", error.message);
     res.status(400).json({ msg: error.message });

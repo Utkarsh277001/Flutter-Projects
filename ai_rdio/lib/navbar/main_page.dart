@@ -1,3 +1,5 @@
+import 'package:ai_rdio/Exercise/HomeScreen.dart';
+import 'package:ai_rdio/fitsyncshop/screens/home/home_screen.dart';
 import 'package:ai_rdio/navbar/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -23,7 +25,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   List pages = [
     Homepage(),
-    HistoryPage(),
+    CatalogApp(),
     GetStarted(),
     ProfilePage(),
   ];

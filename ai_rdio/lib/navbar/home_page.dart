@@ -37,6 +37,18 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
     // "run.png": "run"
   };
   List<gymDetails> gymdetails = [];
+  List<Location> location = [];
+
+  Future<Location?> fetchCoordinates() async {
+    var url = Uri.parse('${Constant.url}/gymInfo/allGymData');
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> data = json.decode(response.body);
+      return Location.fromJson(data);
+    } else {
+      return null; // Handle the error or return a default value
+    }
+  }
 
   Future<void> getGymDetails() async {
     var url = Uri.parse('${Constant.url}/gymInfo/allGymData');
@@ -529,19 +541,37 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
   }
 }
 
+class Location {
+  String type;
+  List<double> coordinates;
+
+  Location({required this.type, required this.coordinates});
+
+  factory Location.fromJson(Map<String, dynamic> json) {
+    return Location(
+      type: json['type'],
+      coordinates: List<double>.from(json['coordinates']),
+    );
+  }
+}
+
 class gymDetails {
   final String image;
   final String ownerEmail;
   final String gymName;
   final String location;
-
+  final String capacity;
+  // List<double> coordinates;
   // Add this line
   gymDetails({
     // required this.image,
     required this.gymName,
     required this.ownerEmail,
     required this.location,
-    required this.image, // Add this line
+    required this.image,
+    required this.capacity,
+    // required this.coordinates,
+    // Add this line
   });
 
   factory gymDetails.fromJson(Map<String, dynamic> json) {
@@ -552,6 +582,8 @@ class gymDetails {
       ownerEmail: json['ownerEmail'],
       location: "${json['City'] ?? ''} , ${json['State'] ?? ''}".trim(),
       image: json['Image'] ?? "0",
+      capacity: json['totalCapacity'] ??
+          "0", // coordinates: List<double>.from(json['coordinates']),
       // Add this line and set default value to empty string if null
     );
   }

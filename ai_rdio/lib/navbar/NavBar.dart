@@ -1,7 +1,8 @@
+import 'package:ai_rdio/fitsyncshop/screens/home/home_screen.dart';
 import 'package:ai_rdio/navbar/chat_screen.dart';
+import 'package:ai_rdio/navbar/gmap.dart';
 
 import 'package:ai_rdio/navbar/payscreen.dart';
-import 'package:ai_rdio/navbar/slot.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -149,11 +150,22 @@ class _NavBarState extends State<NavBar> {
             leading: Icon(Icons.info),
             title: Text('slot counter'),
             onTap: () {
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //       builder: (context) =>
+              //           // SlotCounter(totalSlots: 120, availableSlots: 70)),
+              // );
+            },
+          ),
+
+          ListTile(
+            leading: Icon(Icons.info),
+            title: Text('FitsyncShop'),
+            onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        SlotCounter(totalSlots: 120, availableSlots: 70)),
+                MaterialPageRoute(builder: (context) => CatalogApp()),
               );
             },
           ),
@@ -218,6 +230,16 @@ class _NavBarState extends State<NavBar> {
               prefs.remove('eDate');
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) => Userchoice()));
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.info),
+            title: Text('location-1'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MapPage()),
+              );
             },
           ),
         ],

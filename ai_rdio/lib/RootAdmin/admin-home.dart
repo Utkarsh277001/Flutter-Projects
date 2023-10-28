@@ -98,7 +98,7 @@ class _SuperAdminHomePageState extends State<SuperAdminHomePage> {
               ),
               Spacer(),
               // Spacer(),
-              SizedBox(height: 100),
+              SizedBox(height: 50),
               Expanded(
                 child: Container(
                   height: double.infinity,
@@ -234,6 +234,42 @@ class _SuperAdminHomePageState extends State<SuperAdminHomePage> {
                             ),
                           ],
                         ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(Icons.shopping_cart, color: Colors.black),
+                                SizedBox(width: 8),
+                                Text(
+                                  'FitSync Products',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.black,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                              ),
+                              onPressed: () {
+                                // handle button press
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => GymOwnersPage()),
+                                );
+                              },
+                              child: Text('$_totalGymOwners'),
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ),

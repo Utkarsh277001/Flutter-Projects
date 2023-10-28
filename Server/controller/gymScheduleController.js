@@ -90,5 +90,22 @@ const dailyUser=async(req,res)=>{
     
 }
 
-module.exports={addDailyGym,AllUser,History,DailyGym,dailyUser};
+const slot=async(req,res)=>{
+  console.log("slot availability");
+  console.log(req.body);
+  try {
+    const parameter={date:req.body.date,time:req.body.time,gymName:req.body.gymName};
+    const slotbooked = await dailyGym.countDocuments(parameter);
+    console.log(slotbooked)
+    res.status(200).json({
+          slotBooked:slotbooked 
+        });
+    
+  } catch (error) {
+      console.log("Error while getting stats: ", error.message);
+        res.status(500).json({ msg: "Error while getting stats" });
+  }
+}
+
+module.exports={addDailyGym,AllUser,History,DailyGym,dailyUser,slot};
 
