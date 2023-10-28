@@ -554,6 +554,33 @@ class Location {
     );
   }
 }
+// class gymDetails {
+//   final String image;
+//   final String ownerEmail;
+//   final String gymName;
+//   final String location;
+
+//   // Add this line
+//   gymDetails({
+//     // required this.image,
+//     required this.gymName,
+//     required this.ownerEmail,
+//     required this.location,
+//     required this.image, // Add this line
+//   });
+
+//   factory gymDetails.fromJson(Map<String, dynamic> json) {
+//     return gymDetails(
+//       // image: json[''],
+
+//       gymName: json['gymName'], // Change this line to match your response key
+//       ownerEmail: json['ownerEmail'],
+//       location: "${json['City'] ?? ''} , ${json['State'] ?? ''}".trim(),
+//       image: json['Image'] ?? "0",
+//       // Add this line and set default value to empty string if null
+//     );
+//   }
+// }
 
 class gymDetails {
   final String image;
@@ -563,8 +590,10 @@ class gymDetails {
   final String capacity;
   // List<double> coordinates;
   // Add this line
+  final double latitude;
+  final double longitude;
+
   gymDetails({
-    // required this.image,
     required this.gymName,
     required this.ownerEmail,
     required this.location,
@@ -572,19 +601,29 @@ class gymDetails {
     required this.capacity,
     // required this.coordinates,
     // Add this line
+    required this.latitude,
+    required this.longitude,
   });
 
   factory gymDetails.fromJson(Map<String, dynamic> json) {
-    return gymDetails(
-      // image: json[''],
+    final locationData = json['location'];
+    final coordinates = (locationData != null &&
+            locationData['coordinates'] is List &&
+            locationData['coordinates'].isNotEmpty)
+        ? List<double>.from(locationData['coordinates']
+            .map((dynamic value) => value.toDouble()))
+        : [0.0, 0.0];
 
-      gymName: json['gymName'], // Change this line to match your response key
+    return gymDetails(
+      gymName: json['gymName'],
       ownerEmail: json['ownerEmail'],
       location: "${json['City'] ?? ''} , ${json['State'] ?? ''}".trim(),
       image: json['Image'] ?? "0",
       capacity: json['totalCapacity'] ??
           "0", // coordinates: List<double>.from(json['coordinates']),
       // Add this line and set default value to empty string if null
+      longitude: coordinates.isNotEmpty ? coordinates[0] : 0.0,
+      latitude: coordinates.isNotEmpty ? coordinates[1] : 0.0,
     );
   }
 }

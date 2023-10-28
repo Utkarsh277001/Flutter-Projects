@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ai_rdio/navbar/gmap.dart';
 import 'package:ai_rdio/navbar/payscreen.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -9,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:ai_rdio/Services/dailyGym.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../Utils/Constant.dart';
 import '../Utils/Dialog.dart';
@@ -39,18 +39,6 @@ class GymPageDate extends StatefulWidget {
 }
 
 class _GymPageDateState extends State<GymPageDate> {
-  var name = {
-    'Gym-1.jpg': {'name': "Fitness Zone", 'address': 'Jalandhar , Punjab'},
-    'Gym-2.jpg': {'name': "Muscle Mansion", 'address': 'Chandigarh'},
-    'Gym-3.jpg': {
-      'name': "Health Heaven",
-      'address': 'Hamirpur, Himachal Pradesh'
-    },
-    'Gym-4.jpg': {'name': "Fit Elite Gym", 'address': 'Patna , Bihar'},
-    'Gym-5.jpg': {'name': "Fitness Fusion", 'address': 'Dehradun , Uttrakhand'},
-    'Gym-6.jpg': {'name': "Fitness Club", 'address': 'Kapurthala , Punjab'},
-    'Gym-7.jpg': {'name': "Anytime Fitness", 'address': 'Vasai , Mumbai'},
-  };
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = TimeOfDay.now();
   int gymslot = 0;
@@ -170,6 +158,12 @@ class _GymPageDateState extends State<GymPageDate> {
     total = int.parse(widget.gymDetail.capacity);
     int available = total - gymslot;
 
+    double latitude = widget.gymDetail.latitude;
+    double longitude = widget.gymDetail.longitude;
+
+    print(latitude);
+    print(longitude);
+
     return Scaffold(
       backgroundColor: Colors.grey[200],
       body: Column(
@@ -203,20 +197,49 @@ class _GymPageDateState extends State<GymPageDate> {
                           ),
                         ],
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Icon(Icons.location_on,
-                              size: 20, color: Colors.white),
-                          SizedBox(width: 5),
-                          Text(
-                            widget.gymDetail.location,
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.start,
+                      //   children: <Widget>[
+                      //     Icon(Icons.location_on,
+                      //         size: 20, color: Colors.white),
+                      //     SizedBox(width: 5),
+                      //     Text(
+                      //       widget.gymDetail.location,
+                      //       style: TextStyle(
+                      //         fontSize: 20,
+                      //         color: Colors.white,
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+                      GestureDetector(
+                        onTap: () {
+                          // Navigate to the next page
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MapPage(
+                                latitude: widget.gymDetail.latitude,
+                                longitude: widget.gymDetail.longitude,
+                              ),
                             ),
-                          ),
-                        ],
+                          );
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Icon(Icons.location_on,
+                                size: 20, color: Colors.white),
+                            SizedBox(width: 5),
+                            Text(
+                              widget.gymDetail.location,
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
