@@ -232,16 +232,16 @@ class _NavBarState extends State<NavBar> {
                   MaterialPageRoute(builder: (context) => Userchoice()));
             },
           ),
-          ListTile(
-            leading: Icon(Icons.info),
-            title: Text('location-1'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MapPage()),
-              );
-            },
-          ),
+          // ListTile(
+          //   leading: Icon(Icons.info),
+          //   title: Text('location-1'),
+          //   onTap: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(builder: (context) => MapPage()),
+          //     );
+          //   },
+          // ),
         ],
       ),
     );
