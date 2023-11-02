@@ -1,3 +1,4 @@
+import 'package:ai_rdio/RootAdmin/fitsyncadmin.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -263,7 +264,7 @@ class _SuperAdminHomePageState extends State<SuperAdminHomePage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => GymOwnersPage()),
+                                      builder: (context) => fitsyncadmin()),
                                 );
                               },
                               child: Text('$_totalGymOwners'),

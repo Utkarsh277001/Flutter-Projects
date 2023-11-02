@@ -11,6 +11,7 @@ const ownerRoute = require("./Routers/gymOwner");
 const OwnertHistoryRoute = require("./Routers/ownerHistory");
 const gymSchRouter = require("./Routers/gymScheduler");
 const superAdmin = require("./Routers/superAdmin");
+const Productrouter = require("./Routers/productRouter");
 
 const dbLink = process.env.Link;
 const PORT=process.env.PORT;
@@ -32,6 +33,7 @@ app.get("/",(req,res)=>{
 })
 
 app.use("/gymInfo",gymDetailsrouter);
+app.use("/shop",Productrouter)
 app.use("/api",userRouter);
 app.use("/subscription",subscriptionRouter);
 app.use("/gymOwner",ownerRoute);

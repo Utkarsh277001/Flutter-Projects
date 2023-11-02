@@ -5,6 +5,7 @@ const subscription = require("../Models/Subscription");
 const dailyGym = require("../Models/daily-gym");
 // const gymdata = require("../Models/gymsData");
 const getStats=async(req,res)=>{
+  console.log("stats");
     try {
         const userCount = await User.countDocuments();
         const gymOwnerCount = await ownerGym.countDocuments();

@@ -38,10 +38,7 @@ class _CatalogAppState extends State<CatalogApp> {
             // ),
             GestureDetector(
               child: IconButton(
-                  icon: SvgPicture.asset(
-                    "assets/icons/cart.svg",
-                    colorFilter: ColorFilter.mode(kTextColor, BlendMode.srcIn),
-                  ),
+                  icon: Icon(Icons.category, size: 18, color: Colors.white),
                   onPressed: () => {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (BuildContext context) =>
