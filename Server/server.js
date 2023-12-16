@@ -12,6 +12,9 @@ const OwnertHistoryRoute = require("./Routers/ownerHistory");
 const gymSchRouter = require("./Routers/gymScheduler");
 const superAdmin = require("./Routers/superAdmin");
 const Productrouter = require("./Routers/productRouter");
+const cartRouter = require("./Routers/cartRouter");
+const addressRouter = require("./Routers/addressRouter");
+const orderRouter = require("./Routers/orderRouter");
 
 const dbLink = process.env.Link;
 const PORT=process.env.PORT;
@@ -33,7 +36,10 @@ app.get("/",(req,res)=>{
 })
 
 app.use("/gymInfo",gymDetailsrouter);
-app.use("/shop",Productrouter)
+app.use("/shop",Productrouter);
+app.use("/cart",cartRouter);
+app.use("/address",addressRouter);
+app.use("/order",orderRouter);
 app.use("/api",userRouter);
 app.use("/subscription",subscriptionRouter);
 app.use("/gymOwner",ownerRoute);

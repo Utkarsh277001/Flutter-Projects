@@ -228,6 +228,12 @@ class _AdminHomePageState extends State<fitsyncadmin> {
                                     ElevatedButton(
                                       onPressed: () {
                                         delete(_productData[index].id);
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    fitsyncadmin()));
+
                                         // Handle adding to cart or any other action
                                       },
                                       style: ElevatedButton.styleFrom(
@@ -275,6 +281,7 @@ class _AdminHomePageState extends State<fitsyncadmin> {
                       ElevatedButton(
                         onPressed: () {
                           print("logout");
+
                           // TODO: Implement logout functionality
                           // Navigator.pushReplacement(
                           //     context,

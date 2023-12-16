@@ -1,3 +1,5 @@
+import 'package:ai_rdio/fitsyncshop/screens/home/components/item_card.dart';
+import 'package:ai_rdio/fitsyncshop/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:ai_rdio/fitsyncshop/models/Product.dart';
 
@@ -6,7 +8,7 @@ import '../../../constants.dart';
 class ColorAndSize extends StatelessWidget {
   const ColorAndSize({super.key, required this.product});
 
-  final Product product;
+  final productInfo product;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -19,14 +21,9 @@ class ColorAndSize extends StatelessWidget {
               Row(
                 children: <Widget>[
                   ColorDot(
-                    color: Color(0xFF356C95),
+                    color: HexColor(product.color),
                     isSelected: true,
                   ),
-                  ColorDot(
-                    color: Color(0xFFF8C078),
-                    isSelected: true,
-                  ),
-                  ColorDot(color: Color(0xFFA29B9B), isSelected: false),
                 ],
               ),
             ],
@@ -39,7 +36,7 @@ class ColorAndSize extends StatelessWidget {
               children: [
                 TextSpan(text: "Size\n"),
                 TextSpan(
-                  text: "${product.size} cm",
+                  text: "${product.size} ",
                   style: Theme.of(context)
                       .textTheme
                       .titleLarge!

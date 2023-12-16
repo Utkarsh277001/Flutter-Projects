@@ -1,3 +1,5 @@
+import 'package:ai_rdio/fitsyncshop/screens/home/components/item_card.dart';
+import 'package:ai_rdio/fitsyncshop/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ai_rdio/fitsyncshop/constants.dart';
@@ -12,31 +14,36 @@ import 'components/product_title_with_image.dart';
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({super.key, required this.product});
 
-  final Product product;
+  final productInfo product;
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       // each product have a color
-      backgroundColor: product.color,
+      backgroundColor: HexColor(product.color.toString()),
       appBar: AppBar(
-        backgroundColor: product.color,
+        backgroundColor: HexColor(product.color.toString()),
         elevation: 0,
         leading: IconButton(
           icon: SvgPicture.asset(
             'assets/icons/back.svg',
-            colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            colorFilter: ColorFilter.mode(
+                const Color.fromARGB(255, 0, 0, 0), BlendMode.srcIn),
           ),
           onPressed: () => Navigator.pop(context),
         ),
         actions: <Widget>[
           IconButton(
-            icon: SvgPicture.asset("assets/icons/search.svg"),
+            icon: SvgPicture.asset("assets/icons/search.svg",
+                colorFilter: ColorFilter.mode(
+                    const Color.fromARGB(255, 0, 0, 0), BlendMode.srcIn)),
             onPressed: () {},
           ),
           IconButton(
-            icon: SvgPicture.asset("assets/icons/cart.svg"),
+            icon: SvgPicture.asset("assets/icons/cart.svg",
+                colorFilter: ColorFilter.mode(
+                    const Color.fromARGB(255, 0, 0, 0), BlendMode.srcIn)),
             onPressed: () {},
           ),
           SizedBox(width: kDefaultPaddin / 2)
@@ -52,7 +59,7 @@ class DetailsScreen extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.only(top: size.height * 0.3),
                     padding: EdgeInsets.only(
-                      top: size.height * 0.12,
+                      top: size.height * 0.15,
                       left: kDefaultPaddin,
                       right: kDefaultPaddin,
                     ),
@@ -69,8 +76,8 @@ class DetailsScreen extends StatelessWidget {
                         ColorAndSize(product: product),
                         SizedBox(height: kDefaultPaddin / 2),
                         Description(product: product),
-                        SizedBox(height: kDefaultPaddin / 2),
-                        CounterWithFavBtn(),
+                        // SizedBox(height: kDefaultPaddin / 2),
+                        // CounterWithFavBtn(),
                         SizedBox(height: kDefaultPaddin / 2),
                         AddToCart(product: product)
                       ],

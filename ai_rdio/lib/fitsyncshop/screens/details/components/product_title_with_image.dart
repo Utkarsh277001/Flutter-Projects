@@ -1,12 +1,12 @@
+import 'package:ai_rdio/fitsyncshop/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:ai_rdio/fitsyncshop/models/Product.dart';
 
 import '../../../constants.dart';
 
 class ProductTitleWithImage extends StatelessWidget {
   const ProductTitleWithImage({super.key, required this.product});
 
-  final Product product;
+  final productInfo product;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,11 +15,11 @@ class ProductTitleWithImage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            "Aristocratic Hand Bag",
+            product.id,
             style: TextStyle(color: Colors.white),
           ),
           Text(
-            product.title,
+            product.name,
             style: Theme.of(context)
                 .textTheme
                 .titleLarge!
@@ -45,11 +45,15 @@ class ProductTitleWithImage extends StatelessWidget {
               ),
               SizedBox(width: kDefaultPaddin),
               Expanded(
-                child: Hero(
-                  tag: "${product.id}",
-                  child: Image.asset(
-                    product.image,
-                    fit: BoxFit.fill,
+                child: Container(
+                  width: 300, // Set the desired width for the small box
+                  height: 250, // Set the desired height for the small box
+                  child: Hero(
+                    tag: "${product.id}",
+                    child: Image.network(
+                      product.pic,
+                      fit: BoxFit.cover, // You can adjust the fit as needed
+                    ),
                   ),
                 ),
               )

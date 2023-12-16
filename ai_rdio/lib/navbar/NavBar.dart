@@ -1,3 +1,4 @@
+import 'package:ai_rdio/RootAdmin/orderView.dart';
 import 'package:ai_rdio/fitsyncshop/screens/home/home_screen.dart';
 import 'package:ai_rdio/navbar/chat_screen.dart';
 import 'package:ai_rdio/navbar/gmap.dart';
@@ -165,7 +166,7 @@ class _NavBarState extends State<NavBar> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => CatalogApp()),
+                MaterialPageRoute(builder: (context) => orderScreen()),
               );
             },
           ),

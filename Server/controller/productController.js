@@ -25,6 +25,7 @@ cloudinary.config({
       console.log(result);
       const datas = new Product({
         productid: req.body.productId,
+        productname:req.body.productname,
         category: req.body.category,
         price: req.body.price,
         size: req.body.size,
@@ -48,6 +49,7 @@ const getProduct= async (req, res) => {
  console.log("stats");
      try {
     const product = await Product.find({},);
+    console.log(product);
     res.status(200).json(product);
   } catch (error) {
     console.log("Error while getting users: ", error.message);

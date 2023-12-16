@@ -80,6 +80,9 @@ dependencies:
   flutter_svg: ^2.0.8
   flutter_colorpicker: ^1.0.3
   hex: ^0.2.0
+  autocomplete_textfield: ^2.0.1
+  cloud_firestore: ^4.13.1
+  firebase_core: ^2.22.0
   
   # location: ^5.0.3
   # location: ^5.0.3
@@ -117,6 +120,8 @@ flutter:
      - assets/images/Mylogin.png
      - assets/images2/
      - assets/exercise/
+     - assets/images/
+     - assets/icons/
     #-assets/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

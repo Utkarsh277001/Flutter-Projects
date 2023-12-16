@@ -10,6 +10,9 @@ import 'Exercise/meditation.dart';
 import 'Exercise/pilates.dart';
 import 'Exercise/pull-up.dart';
 
+// Future main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await Firebase.initializeApp();
 void main() async {
   runApp(const MyApp());
   configLoading();

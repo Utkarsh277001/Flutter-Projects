@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:math';
+import 'package:ai_rdio/RootAdmin/fitsyncadmin.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -36,6 +37,7 @@ class _GymRegistrationPageState extends State<productRegistration> {
 
   late String _category;
   late String _price;
+  late String _name;
   late String _size;
   late String _description;
   late String _color;
@@ -71,6 +73,7 @@ class _GymRegistrationPageState extends State<productRegistration> {
         Uri.parse('${Constant.url}/shop/saveProduct'),
       );
       request.fields["productId"] = _id;
+      request.fields["productname"] = _name;
       request.fields["category"] = _category;
       request.fields["price"] = _price;
       request.fields["size"] = _size;
@@ -85,6 +88,8 @@ class _GymRegistrationPageState extends State<productRegistration> {
       var res = await request.send();
       if (res.statusCode == 200) {
         EasyLoading.showSuccess('Added Successfully..');
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => fitsyncadmin()));
         EasyLoading.dismiss();
       } else {
         print(_color);
@@ -159,6 +164,25 @@ class _GymRegistrationPageState extends State<productRegistration> {
                   readOnly: true, // Make it read-only to prevent user input
                   initialValue:
                       _id, // Set the initial value to the generated ID
+                ),
+                SizedBox(height: 20),
+                TextFormField(
+                  decoration: InputDecoration(
+                    labelText: 'Product Name',
+                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.deepPurple),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return '';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _name = value!;
+                  },
                 ),
                 SizedBox(height: 20),
                 TextFormField(
