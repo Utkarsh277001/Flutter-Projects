@@ -1,4 +1,6 @@
 import 'package:ai_rdio/Exercise/cardio.dart';
+import 'package:ai_rdio/Exercise/legs.dart';
+import 'package:ai_rdio/Exercise/shoulder.dart';
 import 'package:ai_rdio/screen/RegLoginUi.dart';
 import 'package:ai_rdio/screen/Regis.dart';
 import 'package:ai_rdio/screen/splash2.dart';
@@ -55,6 +57,8 @@ class MyApp extends StatelessWidget {
         '/BicepsExercisePage': (context) => BicepsExercisePage(),
         '/MeditationExercisePage': (context) => MeditationExercisePage(),
         '/PullExercisePage': (context) => PullExercisePage(),
+        '/LegsExercisePage': (context) => LegsExercisePage(),
+        '/ShoulderExercisePage': (context) => ShoulderExercisePage(),
       },
     );
   }

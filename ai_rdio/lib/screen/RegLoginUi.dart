@@ -52,7 +52,7 @@ class _RegLoginUiState extends State<RegLoginUi> {
                 children: [
                   // ignore: prefer_const_constructors
                   Text(
-                    'Welcome GymMate',
+                    'Welcome To FitSync',
                     // ignore: prefer_const_constructors
                     style: TextStyle(
                         color: Colors.black,

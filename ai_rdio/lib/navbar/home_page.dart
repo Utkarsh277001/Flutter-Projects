@@ -28,10 +28,15 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
   var images = {
-    "cycle.jpg": {'name': 'Cardio', 'link': '/CardioExercisePage'},
-    "biceps-curl-stand.jpg": {'name': 'Biceps', 'link': '/BicepsExercisePage'},
-    "lat-pull.png": {'name': 'Back', 'link': '/MeditationExercisePage'},
-    "flat-bench-press.png": {'name': 'Chest', 'link': '/PullExercisePage'}
+    "cycling.gif": {'name': 'Cardio', 'link': '/CardioExercisePage'},
+    "wristcurl.gif": {'name': 'Arms', 'link': '/BicepsExercisePage'},
+    "pull.gif": {'name': 'Back', 'link': '/MeditationExercisePage'},
+    "benchpress.gif": {'name': 'Chest', 'link': '/PullExercisePage'},
+    "jumpsquat.gif": {'name': 'Legs', 'link': '/LegsExercisePage'},
+    "dumbbelllateralraise.gif": {
+      'name': 'Shoulder',
+      'link': '/ShoulderExercisePage'
+    }
 
     // "run-duo.png": "run-duo",
     // "run.png": "run"
@@ -172,7 +177,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                     borderRadius: BorderRadius.circular(60),
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage("assets/images/logo-gym.png"),
+                      image: AssetImage("assets/images/logo-u.png"),
                     )),
               ),
             ],
@@ -309,6 +314,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                         height: 300,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
+
                           // color: Colors.white,
                           image: DecorationImage(
                             image: NetworkImage(gymdetails[index].image),
@@ -507,8 +513,17 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   // color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 1,
+                                      blurRadius: 3,
+                                      offset: Offset(
+                                          0, 3), // changes position of shadow
+                                    ),
+                                  ],
                                   image: DecorationImage(
-                                    image: AssetImage("assets/images/" +
+                                    image: AssetImage("assets/exercise/" +
                                         images.keys.elementAt(index)),
                                     fit: BoxFit.cover,
                                   ),

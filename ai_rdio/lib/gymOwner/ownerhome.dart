@@ -14,7 +14,7 @@ class AdminHomePage extends StatefulWidget {
 }
 
 class _AdminHomePageState extends State<AdminHomePage> {
-  bool _hasRegisteredGym = true;
+  bool _hasRegisteredGym = false;
   List<GymInfo> _gymData = [];
   String ownerName = '';
   String ownerEmail = '';
@@ -25,7 +25,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
     super.initState();
     EasyLoading.show(status: 'Loading Gym details...');
     _getGyms();
-  } 
+  }
 
   Future<void> _getGyms() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -46,7 +46,9 @@ class _AdminHomePageState extends State<AdminHomePage> {
           print("successfully retrive");
           print(_gymData);
           print(_gymData.length);
-          _hasRegisteredGym = true;
+          if (_gymData.length > 0) {
+            _hasRegisteredGym = true;
+          }
         });
       } else {
         _hasRegisteredGym = false;

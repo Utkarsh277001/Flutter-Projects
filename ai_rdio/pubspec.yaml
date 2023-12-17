@@ -77,20 +77,23 @@ dependencies:
   flutter_polyline_points: ^1.0.0
   geolocator: ^10.0.1
   geocoding: ^2.1.1
-<<<<<<< HEAD
+
   flutter_svg: ^2.0.7
   # location: ^5.0.3
   # location: ^5.0.3
- 
-  
-=======
- 
->>>>>>> 1f842cb298fd2e95d0a7c05ae64c6baca5a50fc1
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  flutter_launcher_icons: "^0.13.1"
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo-u-r.png"
+  min_sdk_android: 21
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
