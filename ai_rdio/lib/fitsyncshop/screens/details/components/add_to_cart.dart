@@ -106,6 +106,7 @@ class _AddToCartState extends State<AddToCart> {
               ),
               onPressed: () {
                 userCart();
+                uploadproduct();
               },
             ),
           ),

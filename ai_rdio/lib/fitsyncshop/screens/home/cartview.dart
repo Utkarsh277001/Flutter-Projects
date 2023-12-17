@@ -125,9 +125,14 @@ class _ProductCartScreenState extends State<ProductCartScreen> {
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Color.fromARGB(255, 0, 0, 0),
-                    textStyle: TextStyle(fontSize: 18),
+                    textStyle: TextStyle(
+                      fontSize: 18,
+                    ),
                   ),
-                  child: Text('          Buy Now          '),
+                  child: Text(
+                    '          Buy Now          ',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
             ],

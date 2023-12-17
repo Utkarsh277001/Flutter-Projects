@@ -82,7 +82,7 @@ class _ProfilePageState extends State<ProfilePage> {
           padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
           child: Column(
             children: [
-              SizedBox(height: 11),
+              SizedBox(height: 9),
               Center(
                 child: Container(
                   decoration: BoxDecoration(
@@ -95,7 +95,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
               ),
-              SizedBox(height: 18),
+              SizedBox(height: 12),
               Center(
                 child: Text(
                   '$name',
@@ -105,14 +105,14 @@ class _ProfilePageState extends State<ProfilePage> {
                       color: Colors.black),
                 ),
               ),
-              SizedBox(height: 7),
+              SizedBox(height: 5),
               Center(
                 child: Text(
                   '$email',
                   style: TextStyle(fontSize: 16, color: Colors.grey[600]),
                 ),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 21),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 11),
                 decoration: BoxDecoration(

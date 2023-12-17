@@ -54,7 +54,7 @@ class _MainPageState extends State<MainPage> {
           elevation: 0,
           items: [
             BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home)),
-            BottomNavigationBarItem(label: "Bar", icon: Icon(Icons.history)),
+            BottomNavigationBarItem(label: "Bar", icon: Icon(Icons.shopify)),
             BottomNavigationBarItem(label: "Search", icon: Icon(Icons.explore)),
             BottomNavigationBarItem(label: "My", icon: Icon(Icons.person)),
           ]),
