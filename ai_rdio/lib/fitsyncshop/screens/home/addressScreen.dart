@@ -79,6 +79,7 @@ class _AddressScreenState extends State<AddressScreen> {
       request.fields["productids"] = widget.productids;
       request.fields["price"] = widget.price;
       request.fields["status"] = "Order Assigned";
+      request.fields["remarks"] = "Tracking Details will be available soon";
 
       var res = await request.send();
       if (res.statusCode == 200) {
@@ -197,7 +198,7 @@ class _AddressScreenState extends State<AddressScreen> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(25.0),
         child: ElevatedButton(
-          onPressed: _addressData.isEmpty || selectedAddressIndex != -1
+          onPressed: selectedAddressIndex == 0
               ? () {
                   openPaymentPortal();
                   // Add your logic for the "Proceed" button on the AddressScreen

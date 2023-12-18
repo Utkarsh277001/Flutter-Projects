@@ -1,7 +1,10 @@
 import 'package:ai_rdio/Services/authSevices.dart';
 import 'package:ai_rdio/components/InputBox.dart';
 import 'package:ai_rdio/components/customButton.dart';
+import 'package:ai_rdio/gymOwner/Otpp.dart';
 import 'package:flutter/material.dart';
+import 'package:email_otp/email_otp.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class regis extends StatefulWidget {
   const regis({super.key});
@@ -18,6 +21,7 @@ class _regisState extends State<regis> {
   final TextEditingController age = TextEditingController();
 
   authAervices Authservice = authAervices();
+  EmailOTP myauth = EmailOTP();
 
   void register() {
     Authservice.signUp(
@@ -46,7 +50,7 @@ class _regisState extends State<regis> {
                 Padding(padding: EdgeInsets.only(top: 60)),
                 // ignore: prefer_const_constructors
                 Text(
-                  'Register as a GymMate',
+                  'Amplify fitness with Fit-Sync',
                   // ignore: prefer_const_constructors
                   style: TextStyle(
                       color: Colors.black,
@@ -142,12 +146,40 @@ class _regisState extends State<regis> {
                 ),
 
                 customButton(
-                  text: 'REGISTER',
-                  onpressed: () {
-                    print("click register");
-                    register();
-                  },
-                ),
+                    text: 'REGISTER',
+                    onpressed: () async {
+                      // print("click register");
+                      // register();
+                      EasyLoading.show(status: "Sending OTP....");
+                      myauth.setConfig(
+                          appEmail: "contact@hdevcoder.com",
+                          appName: "GymMate Email Verification",
+                          userEmail: emailController.text,
+                          otpLength: 4,
+                          otpType: OTPType.digitsOnly);
+                      EasyLoading.dismiss();
+                      if (await myauth.sendOTP() == true) {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text("OTP has been sent"),
+                          backgroundColor: Colors.green,
+                        ));
+                      } else {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text("Oops, OTP send failed"),
+                          backgroundColor: Colors.red,
+                        ));
+                      }
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => OtpScreen(
+                                    myauth: myauth,
+                                    callback: register,
+                                    subject: "Email Verification OTP :",
+                                  )));
+                    }),
                 SizedBox(height: 10),
               ],
             ),

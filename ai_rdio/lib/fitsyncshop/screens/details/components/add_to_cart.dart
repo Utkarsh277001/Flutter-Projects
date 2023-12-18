@@ -88,27 +88,27 @@ class _AddToCartState extends State<AddToCart> {
       padding: const EdgeInsets.symmetric(vertical: kDefaultPaddin),
       child: Row(
         children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(right: kDefaultPaddin),
-            height: 50,
-            width: 58,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(18),
-              border: Border.all(
-                color: HexColor(widget.product.color),
-              ),
-            ),
-            child: IconButton(
-              icon: SvgPicture.asset(
-                "assets/icons/add_to_cart.svg",
-                colorFilter: ColorFilter.mode(
-                    HexColor(widget.product.color.toString()), BlendMode.srcIn),
-              ),
-              onPressed: () {
-                userCart();
-              },
-            ),
-          ),
+          // Container(
+          //   margin: EdgeInsets.only(right: kDefaultPaddin),
+          //   height: 50,
+          //   width: 58,
+          //   // decoration: BoxDecoration(
+          //   //   borderRadius: BorderRadius.circular(18),
+          //   //   border: Border.all(
+          //   //     color: HexColor(widget.product.color),
+          //   //   ),
+          //   // ),
+          //   // child: IconButton(
+          //   //   icon: SvgPicture.asset(
+          //   //     "assets/icons/add_to_cart.svg",
+          //   //     colorFilter: ColorFilter.mode(
+          //   //         HexColor(widget.product.color.toString()), BlendMode.srcIn),
+          //   //   ),
+          //   //   onPressed: () {
+          //   //     userCart();
+          //   //   },
+          //   // ),
+          // ),
           Expanded(
             child: ElevatedButton(
               onPressed: () {
@@ -121,7 +121,7 @@ class _AddToCartState extends State<AddToCart> {
                 backgroundColor: HexColor(widget.product.color.toString()),
               ),
               child: Text(
-                "Buy  Now".toUpperCase(),
+                "Add To Cart...".toUpperCase(),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,

@@ -3,6 +3,7 @@ import 'package:ai_rdio/Utils/Dialog.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class Otp extends StatelessWidget {
   const Otp({
@@ -42,14 +43,15 @@ class Otp extends StatelessWidget {
 }
 
 class OtpScreen extends StatefulWidget {
-  const OtpScreen({
-    Key? key,
-    required this.myauth,
-    required this.callback,
-  }) : super(key: key);
+  const OtpScreen(
+      {Key? key,
+      required this.myauth,
+      required this.callback,
+      required this.subject})
+      : super(key: key);
   final EmailOTP myauth;
   final Function callback;
-
+  final String subject;
   @override
   State<OtpScreen> createState() => _OtpScreenState();
 }
@@ -78,13 +80,16 @@ class _OtpScreenState extends State<OtpScreen> {
           const SizedBox(
             height: 40,
           ),
-          const Icon(Icons.dialpad_rounded, size: 50),
+          const Icon(Icons.security_rounded, size: 50),
           const SizedBox(
             height: 40,
           ),
           const Text(
-            "Enter GymMate Otp",
-            style: TextStyle(fontSize: 40),
+            "Enter Fit-Sync Otp",
+            style: TextStyle(fontSize: 30),
+          ),
+          const SizedBox(
+            height: 40,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -106,8 +111,8 @@ class _OtpScreenState extends State<OtpScreen> {
           const SizedBox(
             height: 40,
           ),
-          const Text(
-            "Authenticate Visitor with OTP",
+          Text(
+            '${widget.subject}',
             style: TextStyle(fontSize: 20),
           ),
           const SizedBox(
@@ -123,13 +128,16 @@ class _OtpScreenState extends State<OtpScreen> {
                   true) {
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text("OTP is verified"),
+                  backgroundColor: Colors.green,
                 ));
                 // widget.onPressed?.call();
                 Navigator.pop(context);
                 widget.callback();
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text("Invalid OTP"),
+                  content: Text("Invalid OTP...... "),
+                  backgroundColor:
+                      Colors.red, // Set a custom background color for error
                 ));
               }
             },

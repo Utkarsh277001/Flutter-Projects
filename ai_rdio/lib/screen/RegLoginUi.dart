@@ -1,5 +1,6 @@
 import 'package:ai_rdio/Services/Authsevices.dart';
 import 'package:ai_rdio/screen/Regis.dart';
+import 'package:ai_rdio/screen/forgotPassword.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -52,7 +53,7 @@ class _RegLoginUiState extends State<RegLoginUi> {
                 children: [
                   // ignore: prefer_const_constructors
                   Text(
-                    'Welcome GymMate',
+                    'Welcome to Fit-Sync',
                     // ignore: prefer_const_constructors
                     style: TextStyle(
                         color: Colors.black,
@@ -84,6 +85,36 @@ class _RegLoginUiState extends State<RegLoginUi> {
                       logedin();
                     },
                   ),
+                  SizedBox(height: 5),
+                  RichText(
+                    text: TextSpan(
+                        text: 'Trouble in LOGIN ? ',
+                        style: TextStyle(
+                            color: const Color.fromARGB(255, 0, 0, 0),
+                            fontSize: 15),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: 'Forgot Password',
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ResetPasswordScreen()));
+                                //Reg bottomSheet
+                                // Get.to(() => regis(),
+                                //     transition: Transition.fade,
+                                //     duration: Duration(milliseconds: 500));
+                              },
+                            style: TextStyle(
+                                // color: Color.fromARGB(255, 67, 5, 124),
+                                color: Colors.black,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ]),
+                  )
                 ],
               ),
             ),
@@ -129,7 +160,7 @@ class Regbtn extends StatelessWidget {
                   alignment: Alignment.center,
                   child: RichText(
                     text: TextSpan(
-                        text: 'Are you not a GymMate ? ',
+                        text: 'Are you not a Fit-Sync ? ',
                         style: TextStyle(color: Colors.white, fontSize: 15),
                         children: <TextSpan>[
                           TextSpan(
@@ -139,7 +170,7 @@ class Regbtn extends StatelessWidget {
                                 //Reg bottomSheet
                                 Get.to(() => regis(),
                                     transition: Transition.fade,
-                                    duration: Duration(milliseconds: 500));
+                                    duration: Duration(milliseconds: 800));
                               },
                             style: TextStyle(
                                 // color: Color.fromARGB(255, 67, 5, 124),
@@ -154,6 +185,3 @@ class Regbtn extends StatelessWidget {
             : Container());
   }
 }
-
-//------------Register UI Bottom Sheet-------------------------
-

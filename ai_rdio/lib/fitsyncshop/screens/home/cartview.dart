@@ -87,51 +87,59 @@ class _ProductCartScreenState extends State<ProductCartScreen> {
             backgroundColor: Colors.transparent,
             elevation: 0,
           ),
-          body: Column(
-            children: <Widget>[
-              Expanded(
-                child: ListView.builder(
-                  itemCount: _cartData.length,
-                  itemBuilder: (context, index) {
-                    return ProductCard(
-                      product: _cartData[index],
-                      onRemove: removeCard,
-                      key: cardKey,
-                    );
-                  },
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.all(10),
-                child: Text(
-                  'Cart Value: ₹${calculateTotalPrice().toStringAsFixed(2)}',
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.all(10),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) => AddressScreen(
-                              productids: productIds,
-                              price: calculateTotalPrice().toStringAsFixed(2),
-                            )));
-
-                    // Handle the "Buy Now" action
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 0, 0, 0),
-                    textStyle: TextStyle(fontSize: 18),
+          body: _cartData.isEmpty
+              ? Center(
+                  child: Text(
+                    'Your cart is empty!',
+                    style: TextStyle(fontSize: 18, color: Colors.black),
                   ),
-                  child: Text('          Buy Now          '),
+                )
+              : Column(
+                  children: <Widget>[
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: _cartData.length,
+                        itemBuilder: (context, index) {
+                          return ProductCard(
+                            product: _cartData[index],
+                            onRemove: removeCard,
+                            key: cardKey,
+                          );
+                        },
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        'Cart Value: ₹${calculateTotalPrice().toStringAsFixed(2)}',
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (BuildContext context) => AddressScreen(
+                                    productids: productIds,
+                                    price: calculateTotalPrice()
+                                        .toStringAsFixed(2),
+                                  )));
+
+                          // Handle the "Buy Now" action
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: Color.fromARGB(255, 0, 0, 0),
+                          textStyle: TextStyle(fontSize: 18),
+                        ),
+                        child: Text('          Buy Now          '),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
         ));
   }
 }

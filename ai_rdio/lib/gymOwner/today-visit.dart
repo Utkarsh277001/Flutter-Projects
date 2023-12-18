@@ -230,18 +230,22 @@ class _DataContainerState extends State<DataContainer> {
                     EasyLoading.dismiss();
                     if (await myauth.sendOTP() == true) {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text("OTP has been sent"),
-                      ));
+                          content: Text("OTP has been sent"),
+                          backgroundColor: Colors.green));
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("Oops, OTP send failed"),
+                        backgroundColor: Colors.red,
                       ));
                     }
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => OtpScreen(
-                                myauth: myauth, callback: _markVisited)));
+                                  myauth: myauth,
+                                  callback: _markVisited,
+                                  subject: "Visitor Authentication OTP : ",
+                                )));
                   },
             child: Text(_visited ? 'Visited' : 'Not Visited'),
           ),

@@ -44,9 +44,15 @@ class _InputBoxState extends State<InputBox> {
                       MinLengthValidator(8,
                           errorText: "Password should be more than 8")
                     ])
-                  : MultiValidator([
-                      RequiredValidator(errorText: "Required"),
-                    ]),
+                  : widget.hint == "New Password"
+                      ? MultiValidator([
+                          RequiredValidator(errorText: "Required"),
+                          MinLengthValidator(8,
+                              errorText: "Password should be more than 8")
+                        ])
+                      : MultiValidator([
+                          RequiredValidator(errorText: "Required"),
+                        ]),
           decoration: InputDecoration(
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.blueAccent),

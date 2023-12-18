@@ -1,5 +1,7 @@
 import 'package:ai_rdio/RootAdmin/orderView.dart';
 import 'package:ai_rdio/fitsyncshop/screens/home/home_screen.dart';
+import 'package:ai_rdio/fitsyncshop/screens/home/orderList.dart';
+import 'package:ai_rdio/fitsyncshop/screens/home/orderScreen.dart';
 import 'package:ai_rdio/navbar/chat_screen.dart';
 import 'package:ai_rdio/navbar/gmap.dart';
 
@@ -151,12 +153,10 @@ class _NavBarState extends State<NavBar> {
             leading: Icon(Icons.info),
             title: Text('slot counter'),
             onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //       builder: (context) =>
-              //           // SlotCounter(totalSlots: 120, availableSlots: 70)),
-              // );
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => OrderList())
+                  // SlotCounter(totalSlots: 120, availableSlots: 70)),
+                  );
             },
           ),
 
