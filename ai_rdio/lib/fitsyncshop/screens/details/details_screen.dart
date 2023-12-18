@@ -1,4 +1,5 @@
 import 'package:ai_rdio/fitsyncshop/screens/home/cartview.dart';
+import 'package:ai_rdio/fitsyncshop/screens/home/cartview.dart';
 import 'package:ai_rdio/fitsyncshop/screens/home/components/item_card.dart';
 import 'package:ai_rdio/fitsyncshop/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,12 @@ class DetailsScreen extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
         actions: <Widget>[
+          IconButton(
+            icon: SvgPicture.asset("assets/icons/search.svg",
+                colorFilter: ColorFilter.mode(
+                    const Color.fromARGB(255, 0, 0, 0), BlendMode.srcIn)),
+            onPressed: () {},
+          ),
           IconButton(
             icon: SvgPicture.asset("assets/icons/cart.svg",
                 colorFilter: ColorFilter.mode(

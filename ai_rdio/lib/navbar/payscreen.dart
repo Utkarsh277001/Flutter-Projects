@@ -122,7 +122,7 @@ class _BuyServicePlanPageState extends State<BuyServicePlanPage> {
         iconTheme: IconThemeData(color: Colors.black),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -130,7 +130,7 @@ class _BuyServicePlanPageState extends State<BuyServicePlanPage> {
               'Choose a plan:',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 12),
             Expanded(
               child: ListView(
                 scrollDirection: Axis.horizontal,
@@ -217,7 +217,7 @@ class ServicePlanCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 16),
+          SizedBox(height: 12),
           Center(
             child: ClipRRect(
               borderRadius: BorderRadius.circular(
@@ -230,7 +230,7 @@ class ServicePlanCard extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 16),
+          SizedBox(height: 12),
           Divider(
             color: Colors.grey,
             thickness: 1,
@@ -266,12 +266,12 @@ class ServicePlanCard extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 16),
+          SizedBox(height: 12),
           Divider(
             color: Colors.grey,
             thickness: 1,
           ),
-          SizedBox(height: 16),
+          SizedBox(height: 12),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             // child: Text(
@@ -334,7 +334,7 @@ class ServicePlanCard extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 25),
+          SizedBox(height: 21),
           Center(
             child: ElevatedButton(
               onPressed: () async {
@@ -375,7 +375,7 @@ class ServicePlanCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(21.0),
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-                minimumSize: Size(250, 50),
+                minimumSize: Size(250, 30),
               ),
             ),
           ),

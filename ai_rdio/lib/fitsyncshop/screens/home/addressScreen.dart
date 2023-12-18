@@ -218,7 +218,7 @@ class _AddressScreenState extends State<AddressScreen> {
               },
             ),
           ),
-          child: Text('Proceed to Pay'),
+          child: Text('Proceed to Pay', style: TextStyle(color: Colors.white)),
         ),
       ),
     );

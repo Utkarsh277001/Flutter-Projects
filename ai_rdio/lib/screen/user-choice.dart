@@ -66,7 +66,7 @@ class _UserchoiceState extends State<Userchoice> {
               ),
             ),
             SizedBox(
-              height: size.height / 39,
+              height: size.height / 66,
             ),
             Column(
               children: [
@@ -83,7 +83,7 @@ class _UserchoiceState extends State<Userchoice> {
                   ),
                 ),
                 SizedBox(
-                  height: 7,
+                  height: 3,
                 ),
                 Container(
                   width: size.width / 1.15,
@@ -120,7 +120,7 @@ class _UserchoiceState extends State<Userchoice> {
                     )
                   ]),
                 ),
-                SizedBox(height: 12),
+                SizedBox(height: 3),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -232,7 +232,7 @@ class _UserchoiceState extends State<Userchoice> {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 21),
                 ElevatedButton(
                   onPressed: () {
                     if (_selectedOption == "Admin") {
@@ -245,7 +245,7 @@ class _UserchoiceState extends State<Userchoice> {
                   },
                   child: Text(
                     'Login/Signup',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.black,
