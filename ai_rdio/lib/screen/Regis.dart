@@ -158,6 +158,7 @@ class _regisState extends State<regis> {
                     onpressed: () async {
                       // print("click register");
                       // register();
+                      EasyLoading.show(status: 'Sending OTP....');
 
                       myauth.setConfig(
                           appEmail: "contact@hdevcoder.com",
