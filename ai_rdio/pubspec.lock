@@ -1060,8 +1060,7 @@ packages:
       sha256: "5c2f730018264d276c20e4f1503fd1308dfbbae39ec8ee63c5236311ac06954b"
       url: "https://pub.dev"
     source: hosted
-<<<<<<< HEAD
-    version: "0.6.0"
+    version: "0.6.1"
   timeline_tile:
     dependency: "direct main"
     description:
@@ -1070,9 +1069,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
-=======
-    version: "0.6.1"
->>>>>>> e993fda2e0c4eed6cb758f018625a83b3356e3af
   typed_data:
     dependency: transitive
     description:

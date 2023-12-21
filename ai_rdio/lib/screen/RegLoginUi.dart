@@ -85,7 +85,7 @@ class _RegLoginUiState extends State<RegLoginUi> {
                       logedin();
                     },
                   ),
-                  SizedBox(height: 5),
+                  SizedBox(height: 12),
                   RichText(
                     text: TextSpan(
                         text: 'Trouble in LOGIN ? ',

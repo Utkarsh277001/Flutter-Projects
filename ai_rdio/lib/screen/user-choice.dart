@@ -66,14 +66,14 @@ class _UserchoiceState extends State<Userchoice> {
               ),
             ),
             SizedBox(
-              height: size.height / 66,
+              height: size.height / 51,
             ),
             Column(
               children: [
                 Container(
                   width: size.width / 1.15,
                   child: Text(
-                    "Welcome To Fit-Sync",
+                    "Welcome To FitSync",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 30,
@@ -120,7 +120,7 @@ class _UserchoiceState extends State<Userchoice> {
                     )
                   ]),
                 ),
-                SizedBox(height: 3),
+                SizedBox(height: 9),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -130,10 +130,10 @@ class _UserchoiceState extends State<Userchoice> {
                         boxShadow: [
                           BoxShadow(
                             color: (_selectedOption == "User")
-                                ? Color.fromARGB(255, 228, 226, 226)
+                                ? Colors.grey.withOpacity(0.2)
                                 : Colors.transparent,
-                            spreadRadius: 0,
-                            blurRadius: 0,
+                            spreadRadius: 2,
+                            blurRadius: 5,
                             offset: Offset(0, 3),
                           )
                         ],
@@ -161,7 +161,7 @@ class _UserchoiceState extends State<Userchoice> {
                                   ),
                                   SizedBox(height: 10),
                                   Text(
-                                    " Gym User  ",
+                                    "User",
                                     style: TextStyle(
                                       fontSize: 20,
                                       color: (_selectedOption == "User"
@@ -183,11 +183,10 @@ class _UserchoiceState extends State<Userchoice> {
                         boxShadow: [
                           BoxShadow(
                             color: (_selectedOption == "Admin")
-                                ? Color.fromARGB(255, 228, 226, 226)
-                                    .withOpacity(1)
+                                ? Colors.grey.withOpacity(0.2)
                                 : Colors.transparent,
                             spreadRadius: 2,
-                            blurRadius: 0,
+                            blurRadius: 5,
                             offset: Offset(0, 3),
                           )
                         ],
@@ -207,7 +206,7 @@ class _UserchoiceState extends State<Userchoice> {
                               child: Column(
                                 children: [
                                   Icon(
-                                    Icons.analytics,
+                                    Icons.admin_panel_settings,
                                     size: 50,
                                     color: (_selectedOption == "Admin"
                                         ? Colors.black
@@ -232,7 +231,7 @@ class _UserchoiceState extends State<Userchoice> {
                     ),
                   ],
                 ),
-                SizedBox(height: 21),
+                SizedBox(height: 12),
                 ElevatedButton(
                   onPressed: () {
                     if (_selectedOption == "Admin") {

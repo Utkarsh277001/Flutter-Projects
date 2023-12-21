@@ -167,7 +167,7 @@ class Regbtn extends StatelessWidget {
                   alignment: Alignment.center,
                   child: RichText(
                     text: TextSpan(
-                        text: 'Are you not a GymMate ? ',
+                        text: 'Are you not on FitSync ? ',
                         style: TextStyle(color: Colors.white, fontSize: 15),
                         children: <TextSpan>[
                           TextSpan(

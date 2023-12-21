@@ -54,7 +54,7 @@ class _OwnerregisState extends State<Ownerregis> {
                 Padding(padding: EdgeInsets.only(top: 60)),
                 // ignore: prefer_const_constructors
                 Text(
-                  'Register as a GymMate',
+                  'Register on  FitSync',
                   // ignore: prefer_const_constructors
                   style: TextStyle(
                       color: Colors.black,

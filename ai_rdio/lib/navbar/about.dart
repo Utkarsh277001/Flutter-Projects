@@ -77,7 +77,7 @@ class AboutPage extends StatelessWidget {
                               left: 0,
                               right: 0,
                               child: Container(
-                                height: innerHeight * 0.6,
+                                height: innerHeight * 0.7,
                                 width: innerWidth,
                                 decoration: BoxDecoration(
                                   color: Color.fromARGB(255, 247, 246, 246),
@@ -98,7 +98,7 @@ class AboutPage extends StatelessWidget {
                                       height: 20,
                                     ),
                                     Text(
-                                      'About GymMate',
+                                      'About FitSync',
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontFamily: 'Nunito',
@@ -114,7 +114,7 @@ class AboutPage extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.all(11.0),
                                       child: Text(
-                                        '''The "GymMate" app is a mobile fitness application designed to help users achieve their fitness goals by providing personalized workout plans, tracking progress and provide single Membership to access different gyms.''',
+                                        '''The "FitSync" app is a mobile fitness application designed to help users achieve their fitness goals by providing personalized workout plans, tracking progress and provide single Membership to access different gyms.''',
                                         style: TextStyle(
                                           color: Colors.black,
                                           fontFamily: 'Nunito',
@@ -225,7 +225,7 @@ class AboutPage extends StatelessWidget {
                     height: 30,
                   ),
                   Container(
-                    height: height * 0.4,
+                    height: height * 0.5,
                     width: width,
                     decoration: BoxDecoration(
                       color: Color.fromARGB(255, 247, 246, 246),
@@ -263,7 +263,7 @@ class AboutPage extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              '''* GYMMATE has a significant potential to revolutionize the fitness industry by providing users with a convenient way to access multiple fitness centers with a single subscription.\n\n * It has the scope to expand its services globally, attracting fitness enthusiasts who prefer flexibility in their workout routine\n\n * The app can also benefit gym owners by providing them with a platform to reach out to a wider audience and increase their revenue\n''',
+                              '''* FitSync has a significant potential to revolutionize the fitness industry by providing users with a convenient way to access multiple fitness centers with a single subscription.\n\n * It has the scope to expand its services globally, attracting fitness enthusiasts who prefer flexibility in their workout routine\n\n * The app can also benefit gym owners by providing them with a platform to reach out to a wider audience and increase their revenue\n''',
                               style: TextStyle(
                                   decorationColor: Colors.black,
                                   //fontWeight: FontWeight.bold,
@@ -387,7 +387,7 @@ class AboutPage extends StatelessWidget {
                     height: 30,
                   ),
                   Container(
-                    height: height * .8,
+                    height: height * 1,
                     width: width,
                     decoration: BoxDecoration(
                       color: Color.fromARGB(255, 247, 246, 246),
@@ -424,7 +424,7 @@ class AboutPage extends StatelessWidget {
                           ),
 //
                           Container(
-                            height: height * 0.15,
+                            height: height * 0.2,
                             decoration: BoxDecoration(
                               color: Color.fromARGB(255, 250, 241, 238),
                               borderRadius: BorderRadius.circular(30),
@@ -461,7 +461,7 @@ class AboutPage extends StatelessWidget {
                           ),
 //
                           Container(
-                            height: height * 0.2,
+                            height: height * 0.25,
                             decoration: BoxDecoration(
                               color: Color.fromARGB(255, 237, 235, 235),
                               borderRadius: BorderRadius.circular(30),
@@ -502,7 +502,7 @@ class AboutPage extends StatelessWidget {
                           ),
 
                           Container(
-                            height: height * 0.22,
+                            height: height * 0.3,
                             decoration: BoxDecoration(
                               color: Color.fromARGB(255, 247, 241, 176),
                               borderRadius: BorderRadius.circular(30),
@@ -693,7 +693,7 @@ class AboutPage extends StatelessWidget {
 //                             ),
 //                           )
                   Container(
-                    height: height * .2,
+                    height: height * .25,
                     width: width,
                     decoration: BoxDecoration(
                       color: Color.fromARGB(255, 247, 246, 246),
@@ -731,7 +731,7 @@ class AboutPage extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(0),
                             child: Text(
-                              '''* www.gymmate.com\n\n*9000065798\n\n*gymmate@gmail.com''',
+                              '''* www.FitSync.com\n\n*9000065798\n\n*FitSync@gmail.com''',
                               style: TextStyle(
                                   decorationColor: Colors.black,
                                   //fontWeight: FontWeight.bold,

@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget listViewBuilder(Size size) {
     return Container(
-      height: size.height / 1.25,
+      height: size.height / 1.29,
       width: size.width,
       child: ListView.builder(
         itemCount: data.length,

@@ -81,7 +81,7 @@ class _SuperAdminHomePageState extends State<SuperAdminHomePage> {
             children: [
               SizedBox(height: 100),
               Text(
-                'Gymmate',
+                'FitSync',
                 style: TextStyle(
                   fontSize: 48,
                   fontWeight: FontWeight.bold,
@@ -90,7 +90,7 @@ class _SuperAdminHomePageState extends State<SuperAdminHomePage> {
               ),
               SizedBox(height: 8),
               Text(
-                'Access Anywhere',
+                'Access Gyms Anywhere',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.normal,
@@ -158,7 +158,10 @@ class _SuperAdminHomePageState extends State<SuperAdminHomePage> {
 
                                 // handle button press
                               },
-                              child: Text('$_users'),
+                              child: Text(
+                                '$_users',
+                                style: TextStyle(color: Colors.white),
+                              ),
                             ),
                           ],
                         ),
@@ -194,7 +197,8 @@ class _SuperAdminHomePageState extends State<SuperAdminHomePage> {
                                       builder: (context) => GymList()),
                                 );
                               },
-                              child: Text('$_totalGyms'),
+                              child: Text('$_totalGyms',
+                                  style: TextStyle(color: Colors.white)),
                             ),
                           ],
                         ),
@@ -231,7 +235,8 @@ class _SuperAdminHomePageState extends State<SuperAdminHomePage> {
                                       builder: (context) => GymOwnersPage()),
                                 );
                               },
-                              child: Text('$_totalGymOwners'),
+                              child: Text('$_totalGymOwners',
+                                  style: TextStyle(color: Colors.white)),
                             ),
                           ],
                         ),
@@ -267,7 +272,8 @@ class _SuperAdminHomePageState extends State<SuperAdminHomePage> {
                                       builder: (context) => fitsyncadmin()),
                                 );
                               },
-                              child: Text('$_totalGymOwners'),
+                              child: Text('$_totalGymOwners',
+                                  style: TextStyle(color: Colors.white)),
                             ),
                           ],
                         )
