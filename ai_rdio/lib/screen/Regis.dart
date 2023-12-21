@@ -33,6 +33,14 @@ class _regisState extends State<regis> {
         gender: gender.toString());
   }
 
+  void loading() {
+    EasyLoading.show(status: 'Sending OTP....');
+  }
+
+  void cancel() {
+    EasyLoading.dismiss();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,14 +158,14 @@ class _regisState extends State<regis> {
                     onpressed: () async {
                       // print("click register");
                       // register();
-                      EasyLoading.show(status: "Sending OTP....");
+
                       myauth.setConfig(
                           appEmail: "contact@hdevcoder.com",
                           appName: "Fit-Sync Email Verification",
                           userEmail: emailController.text,
                           otpLength: 4,
                           otpType: OTPType.digitsOnly);
-                      EasyLoading.dismiss();
+
                       if (await myauth.sendOTP() == true) {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(
