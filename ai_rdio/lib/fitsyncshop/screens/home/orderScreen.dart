@@ -15,7 +15,7 @@ class OrderUpdate {
 }
 
 class CurrentOrderStage extends ChangeNotifier {
-  int _currentStage = 1;
+  int _currentStage = 0;
 
   int get currentStage => _currentStage;
 
@@ -25,19 +25,19 @@ class CurrentOrderStage extends ChangeNotifier {
   }
 }
 
-class OrderHistory extends StatelessWidget {
+class OrderHistory extends StatefulWidget {
+  final String orderId;
+  final String remarks;
+  final String status;
+
+  OrderHistory(
+      {required this.orderId, required this.remarks, required this.status});
+
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: ChangeNotifierProvider(
-        create: (context) => CurrentOrderStage(),
-        child: OrderTimelineScreen(),
-      ),
-    );
-  }
+  State<OrderHistory> createState() => _OrderHistoryState();
 }
 
-class OrderTimelineScreen extends StatelessWidget {
+class _OrderHistoryState extends State<OrderHistory> {
   final List<OrderUpdate> orderUpdates = [
     OrderUpdate(
       status: 'Order Placed',
@@ -61,6 +61,18 @@ class OrderTimelineScreen extends StatelessWidget {
     ),
   ];
 
+  @override
+  void initState() {
+    super.initState();
+    state();
+  }
+
+  int current = 0;
+  void state() {
+    double amount = double.tryParse(widget.status) ?? 0.0;
+    current = amount.toInt();
+  }
+
   final List<IconData> statusIcons = [
     Icons.shopping_cart,
     Icons.access_time,
@@ -82,14 +94,14 @@ class OrderTimelineScreen extends StatelessWidget {
             margin: EdgeInsets.all(16),
             padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.blueGrey,
+              color: Color.fromARGB(255, 166, 193, 240),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Order ID: 123456',
+                  'Order Id : ${widget.orderId}',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -97,11 +109,30 @@ class OrderTimelineScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 8),
-                Text(
-                  'Remarks: Special instructions or comments can be displayed here.',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
+                RichText(
+                  text: TextSpan(
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black, // Default text color
+                    ),
+                    children: [
+                      TextSpan(
+                        text: 'Remarks: ',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: const Color.fromARGB(
+                              255, 255, 255, 255), // Color for "Remarks:"
+                        ),
+                      ),
+                      TextSpan(
+                        text: '${widget.remarks}',
+                        style: TextStyle(
+                          fontStyle: FontStyle.italic,
+                          color: Color.fromARGB(
+                              255, 2, 69, 255), // Color for $remarks
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -144,7 +175,7 @@ class OrderTimelineScreen extends StatelessWidget {
   }
 
   Color _getIndicatorColor(BuildContext context, int index) {
-    return index <= context.read<CurrentOrderStage>().currentStage
+    return index <= current
         ? Colors.green
         : const Color.fromARGB(255, 54, 56, 58);
   }

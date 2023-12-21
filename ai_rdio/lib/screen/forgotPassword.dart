@@ -6,6 +6,7 @@ import 'package:ai_rdio/Utils/Constant.dart';
 import 'package:ai_rdio/Utils/Dialog.dart';
 import 'package:ai_rdio/components/InputBox.dart';
 import 'package:ai_rdio/gymOwner/Otpp.dart';
+import 'package:ai_rdio/gymOwner/owner-login.dart';
 import 'package:ai_rdio/screen/RegLoginUi.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,10 @@ import 'package:email_otp/email_otp.dart';
 import 'package:http/http.dart' as http;
 
 class ResetPasswordScreen extends StatefulWidget {
+  final int call;
+
+  ResetPasswordScreen({required this.call});
+
   @override
   _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
 }
@@ -27,7 +32,12 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   bool isOtpVerified = false;
 
   void updatePassword() async {
-    final url = "${Constant.url}/api/forgotPass";
+    String url = "";
+    if (widget.call == 1) {
+      url = "${Constant.url}/api/forgotPass";
+    } else if (widget.call == 0) {
+      url = '${Constant.url}/gymOwner/forgotPass';
+    }
     final headers = {HttpHeaders.contentTypeHeader: 'application/json'};
     final body = json.encode({
       'email': emailController.text,
@@ -54,10 +64,20 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         context, MaterialPageRoute(builder: (context) => RegLoginUi()));
   }
 
+  void ontapp() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => OwnerRegLoginUi()));
+  }
+
   void popup() {
     updatePassword();
-    msgPop(
-        context, 'OTP verified', "", DialogType.success, ontap, "Login Screen");
+    if (widget.call == 1) {
+      msgPop(context, 'OTP verified', "", DialogType.success, ontap,
+          "Login Screen");
+    } else if (widget.call == 0) {
+      msgPop(context, 'OTP verified', "", DialogType.success, ontapp,
+          "Login Screen");
+    }
   }
 
   @override
@@ -99,18 +119,23 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
                       myauth.setConfig(
                           appEmail: "contact@hdevcoder.com",
-                          appName: "GymMate Email Verification",
+                          appName:
+                              "Fit-Sync Forget Password Email Verification",
                           userEmail: emailController.text,
                           otpLength: 4,
                           otpType: OTPType.digitsOnly);
-                      EasyLoading.dismiss();
+
                       if (await myauth.sendOTP() == true) {
+                        EasyLoading.dismiss();
+
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(
                           content: Text("OTP has been sent"),
                           backgroundColor: Colors.green,
                         ));
                       } else {
+                        EasyLoading.dismiss();
+
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(
                           content: Text("Oops, OTP send failed"),
@@ -130,6 +155,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       // Implement logic to send OTP
                       // For simplicity, let's assume OTP is always sent successfully
                     } else {
+                      EasyLoading.dismiss();
                       // New password is empty or less than 8 characters
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text(

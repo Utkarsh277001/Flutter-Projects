@@ -153,7 +153,7 @@ class _regisState extends State<regis> {
                       EasyLoading.show(status: "Sending OTP....");
                       myauth.setConfig(
                           appEmail: "contact@hdevcoder.com",
-                          appName: "GymMate Email Verification",
+                          appName: "Fit-Sync Email Verification",
                           userEmail: emailController.text,
                           otpLength: 4,
                           otpType: OTPType.digitsOnly);

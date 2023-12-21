@@ -101,7 +101,9 @@ class _RegLoginUiState extends State<RegLoginUi> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            ResetPasswordScreen()));
+                                            ResetPasswordScreen(
+                                              call: 1,
+                                            )));
                                 //Reg bottomSheet
                                 // Get.to(() => regis(),
                                 //     transition: Transition.fade,

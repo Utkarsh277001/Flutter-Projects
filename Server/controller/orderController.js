@@ -14,8 +14,25 @@ const saveOrder=async(req,res)=>{
     } catch (error) {
       console.log(error);
     }
+
+  }
+
+  const userOrder =async(req, res) => {
+  console.log("OrderHis. called");
+  try {
+    const { useremail } = req.params;
+
+    let data = await Order.find({useremail:useremail});
+    console.log(data);
+     res.status(200).json(data);
+
+ 
+  } catch (error) {
+    res.status(400).json(error);
+  }
 }
 
+
 module.exports={
-    saveOrder
+    saveOrder,userOrder
 }

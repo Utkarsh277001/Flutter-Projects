@@ -223,7 +223,7 @@ class _DataContainerState extends State<DataContainer> {
                     EasyLoading.show(status: "Sending OTP....");
                     myauth.setConfig(
                         appEmail: "contact@hdevcoder.com",
-                        appName: "GymMate OTP Verification",
+                        appName: "Fit-Sync OTP Verification",
                         userEmail: widget.userData.email,
                         otpLength: 4,
                         otpType: OTPType.digitsOnly);

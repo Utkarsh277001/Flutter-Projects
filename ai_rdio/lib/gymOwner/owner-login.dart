@@ -1,11 +1,9 @@
-import 'package:ai_rdio/Services/authSevices.dart';
 import 'package:ai_rdio/gymOwner/owner-regisui.dart';
-import 'package:ai_rdio/screen/Regis.dart';
+import 'package:ai_rdio/screen/forgotPassword.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Services/owner.dart';
 import '../components/InputBox.dart';
@@ -92,6 +90,38 @@ class _OwnerRegLoginUiState extends State<OwnerRegLoginUi> {
                       logedin();
                     },
                   ),
+                  SizedBox(height: 5),
+                  RichText(
+                    text: TextSpan(
+                        text: 'Trouble in LOGIN ? ',
+                        style: TextStyle(
+                            color: const Color.fromARGB(255, 0, 0, 0),
+                            fontSize: 15),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: 'Forgot Password',
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ResetPasswordScreen(
+                                              call: 0,
+                                            )));
+                                //Reg bottomSheet
+                                // Get.to(() => regis(),
+                                //     transition: Transition.fade,
+                                //     duration: Duration(milliseconds: 500));
+                              },
+                            style: TextStyle(
+                                // color: Color.fromARGB(255, 67, 5, 124),
+                                color: Colors.black,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ]),
+                  )
                 ],
               ),
             ),

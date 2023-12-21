@@ -76,6 +76,14 @@ class _GymPageDateState extends State<GymPageDate> {
       });
   }
 
+  void slotpop() {
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text(
+          "Sorry for inconvenience cause to you !!                  Current slots are full .please select other slots"),
+      backgroundColor: Colors.red, // Set a custom background color for error
+    ));
+  }
+
   void ontap() {
     Navigator.push(
         context,
@@ -395,8 +403,10 @@ class _GymPageDateState extends State<GymPageDate> {
                                           '${available}',
                                           style: TextStyle(
                                             fontSize: 36,
-                                            color:
-                                                Color.fromARGB(244, 57, 255, 7),
+                                            color: available == 0
+                                                ? Colors.red
+                                                : Color.fromARGB(
+                                                    244, 57, 255, 7),
                                           ),
                                         ),
                                         Text(
@@ -421,37 +431,42 @@ class _GymPageDateState extends State<GymPageDate> {
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Center(
               child: ElevatedButton(
-                onPressed: () async {
-                  final prefs = await SharedPreferences.getInstance();
-                  String userEmail = prefs.getString('email')!;
-                  String check = prefs.getString('doesSubs')!;
+                onPressed: available > 0
+                    ? () async {
+                        final prefs = await SharedPreferences.getInstance();
+                        String userEmail = prefs.getString('email')!;
+                        String check = prefs.getString('doesSubs')!;
 
-                  // print(userId);
-                  // print(gymName);
-                  // print(location);
-                  // print(date);
-                  // print(time);
-                  DailyGym dailyGym = DailyGym();
-                  if (check == "Yes") {
-                    dailyGym.Dailygym(
-                        context: context,
-                        ownerEmail: widget.gymDetail.ownerEmail,
-                        userEmail: userEmail,
-                        image: widget.gymDetail.image,
-                        gymName: widget.gymDetail.gymName,
-                        location: widget.gymDetail.location,
-                        date: date,
-                        time: time);
-                  } else {
-                    msgPop(
-                        context,
-                        'No Subscription',
-                        "Plese avail our subscription for services",
-                        DialogType.error,
-                        ontap,
-                        "Buy Here");
-                  }
-                },
+                        // print(userId);
+                        // print(gymName);
+                        // print(location);
+                        // print(date);
+                        // print(time);
+                        DailyGym dailyGym = DailyGym();
+                        if (check == "Yes") {
+                          dailyGym.Dailygym(
+                              context: context,
+                              ownerEmail: widget.gymDetail.ownerEmail,
+                              userEmail: userEmail,
+                              image: widget.gymDetail.image,
+                              gymName: widget.gymDetail.gymName,
+                              location: widget.gymDetail.location,
+                              date: date,
+                              time: time);
+                        } else {
+                          msgPop(
+                              context,
+                              'No Subscription',
+                              "Plese avail our subscription for services",
+                              DialogType.error,
+                              ontap,
+                              "Buy Here");
+                        }
+                      }
+                    : () {
+                        slotpop();
+                      } // New password is empty or less than 8 characters
+                ,
                 child: Text(
                   'Submit',
                   style: TextStyle(color: Colors.white),

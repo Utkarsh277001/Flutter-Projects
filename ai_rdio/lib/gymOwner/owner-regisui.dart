@@ -1,7 +1,10 @@
 import 'package:ai_rdio/Services/authSevices.dart';
 import 'package:ai_rdio/components/InputBox.dart';
 import 'package:ai_rdio/components/customButton.dart';
+import 'package:ai_rdio/gymOwner/Otpp.dart';
+import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../Services/owner.dart';
 
@@ -30,6 +33,9 @@ class _OwnerregisState extends State<Ownerregis> {
         age: age.text,
         gender: gender.toString());
   }
+
+  authAervices Authservice = authAervices();
+  EmailOTP myauth = EmailOTP();
 
   @override
   Widget build(BuildContext context) {
@@ -145,9 +151,36 @@ class _OwnerregisState extends State<Ownerregis> {
 
                 customButton(
                   text: 'REGISTER',
-                  onpressed: () {
-                    print("click register");
-                    register();
+                  onpressed: () async {
+                    // print("click register");
+                    // register();
+                    EasyLoading.show(status: "Sending OTP....");
+                    myauth.setConfig(
+                        appEmail: "contact@hdevcoder.com",
+                        appName: "Fit-Sync Email Verification",
+                        userEmail: emailController.text,
+                        otpLength: 4,
+                        otpType: OTPType.digitsOnly);
+                    EasyLoading.dismiss();
+                    if (await myauth.sendOTP() == true) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("OTP has been sent"),
+                        backgroundColor: Colors.green,
+                      ));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Oops, OTP send failed"),
+                        backgroundColor: Colors.red,
+                      ));
+                    }
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => OtpScreen(
+                                  myauth: myauth,
+                                  callback: register,
+                                  subject: "Email Verification OTP :",
+                                )));
                   },
                 ),
                 SizedBox(height: 10),

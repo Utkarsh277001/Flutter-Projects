@@ -44,9 +44,11 @@ class _AddressScreenState extends State<AddressScreen> {
           print("successfully retrive");
         });
       } else {
-        print('Failed to load gyms: ${response.statusCode}');
+        EasyLoading.dismiss();
+        print('Failed to load address: ${response.statusCode}');
       }
     } catch (error) {
+      EasyLoading.dismiss();
       print('Error loading gyms: $error');
     }
   }
@@ -78,7 +80,7 @@ class _AddressScreenState extends State<AddressScreen> {
           _addressData[selectedAddressIndex].pincode;
       request.fields["productids"] = widget.productids;
       request.fields["price"] = widget.price;
-      request.fields["status"] = "Order Assigned";
+      request.fields["status"] = "0";
       request.fields["remarks"] = "Tracking Details will be available soon";
 
       var res = await request.send();
